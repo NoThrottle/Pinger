@@ -106,7 +106,8 @@ namespace XAMLPingNET
 
         //---------------//
 
-        double intervaltimer = 1; //seconds
+        double intervaltimer = 5; //seconds
+        double uitimer = 1/30; //30fps
         int setactive = 0; //0 is none
 
         //---------------//
@@ -153,20 +154,44 @@ namespace XAMLPingNET
 
         }
 
-        private void Pinger_Timer()
+
+        DispatcherTimer pinger_timer = null;
+        DispatcherTimer ui_timer = null;
+
+        private void Pinger_Timer(bool restart)
         {
-            Debug.WriteLine("start");
+            if (restart == false)
+            {
+                pinger_timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(intervaltimer) };
+                pinger_timer.Tick += PingerTimer_Tick;
+                pinger_timer.Start();
+            }
+            else
+            {
+                pinger_timer.Stop();
+                pinger_timer = null;
 
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(intervaltimer) };
-            timer.Tick += dispatcherTimer_Tick;
-            timer.Start();
-            Debug.WriteLine("started");
-
+                pinger_timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(intervaltimer) };
+                pinger_timer.Tick += PingerTimer_Tick;
+                pinger_timer.Start();
+            }
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void UI_Timer()
+        {
+                ui_timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(uitimer)};
+                ui_timer.Tick += UITimer_Tick;
+                ui_timer.Start();
+            
+        }
+
+        private void PingerTimer_Tick(object sender, EventArgs e)
         {
             PingEachOne();
+        }
+
+        private void UITimer_Tick(object sender, EventArgs e)
+        {
             UpdateEachOne();
         }
 
@@ -223,8 +248,6 @@ namespace XAMLPingNET
         private void PingEachOne()
         {
             //Debug.WriteLine("eachone");
-
-            Dispatcher.Invoke(() => { });
 
             #region Google Tasks
             Task.Run(() =>

@@ -27,13 +27,15 @@ namespace XAMLPingNET
             Debug.WriteLine("istart");
 
             InitializeComponent();
-
-
             Startup_Load_Loop_Timer("start");
 
             UpdateAcrylic();
+
             PingEachOne();
-            Pinger_Timer();
+            UpdateEachOne();
+
+            UI_Timer();
+            Pinger_Timer(false);
 
             calltostop_StartupLoad = true;
 
@@ -54,6 +56,7 @@ namespace XAMLPingNET
                 ActiveButton_Shadow.Color = Color.FromArgb(255, 164, 255, 196);
                 ActiveButton_Text.Content = "Active";
                 intervaltimer = 1;
+                Pinger_Timer(true);
 
             }
             else
@@ -62,6 +65,8 @@ namespace XAMLPingNET
                 ActiveButton_Shadow.Color = Color.FromArgb(255, 110, 110, 110);
                 ActiveButton_Text.Content = "Inactive";
                 intervaltimer = 5;
+                Pinger_Timer(true);
+
             }
         }
 
