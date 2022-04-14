@@ -59,7 +59,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="1" Name="ActiveButton" MouseDown="ActiveButton_MouseDown" MouseEnter="ActiveButton_hoverfunc" MouseLeave="ActiveButton_hoverfunc" Cursor="Hand">
+                <Grid Grid.Column="1" Name="ActiveButton" MouseDown="ActiveButton_MouseDown" MouseEnter="ActiveButton_hoverfunc" MouseLeave="ActiveButton_hoverfunc" Cursor="Hand" ToolTip="Currently Not Pinging">
                     <Border Name="ActiveButton_BG" BorderThickness="1" Grid.ColumnSpan="1" CornerRadius="4,4,4,4" Background="#FF6e6e6e">
                         <Border.Effect>
                             <DropShadowEffect x:Name="ActiveButton_Shadow" ShadowDepth="0" BlurRadius="10" Opacity="0.4" Color="#FF6e6e6e"/>
@@ -393,15 +393,15 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Name="tab1" Grid.Column="1" MouseDown="SetActiveTab1">
+            <Grid Name="tab1" Grid.Column="1" MouseDown="SetActiveTab1" Cursor="Hand">
                 <Image x:Name="tabs_Home" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/web.png" Grid.ColumnSpan="1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"/>
             </Grid>
 
-            <Grid Name="tab2" Grid.Column="2" MouseDown="SetActiveTab2">
+            <Grid Name="tab2" Grid.Column="2" MouseDown="SetActiveTab2" Cursor="Hand">
                 <Image x:Name="tabs_Gaming" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/controller-classic-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
             </Grid>
 
-            <Grid Name="tab3" Grid.Column="3" MouseDown="SetActiveTab3">
+            <Grid Name="tab3" Grid.Column="3" MouseDown="SetActiveTab3" Cursor="Hand">
                 <Image x:Name="tabs_Statistics" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/chart-box-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
             </Grid>
 

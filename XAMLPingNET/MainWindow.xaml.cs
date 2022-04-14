@@ -56,6 +56,7 @@ namespace XAMLPingNET
                 ActiveButton_Shadow.Color = Color.FromArgb(255, 164, 255, 196);
                 ActiveButton_Text.Content = "Active";
                 intervaltimer = 1;
+
                 Pinger_Timer(true);
 
             }
@@ -65,6 +66,7 @@ namespace XAMLPingNET
                 ActiveButton_Shadow.Color = Color.FromArgb(255, 110, 110, 110);
                 ActiveButton_Text.Content = "Inactive";
                 intervaltimer = 5;
+
                 Pinger_Timer(true);
 
             }
@@ -75,6 +77,8 @@ namespace XAMLPingNET
         private void ActiveButton_hoverfunc(object sender, MouseEventArgs e)
         {
             Console.WriteLine("ActiveButton hov detected");
+
+            ActiveButton.ToolTip = "Pinging every " + intervaltimer + " seconds.";
 
             if (activebutton_active == false)
             {
@@ -154,7 +158,6 @@ namespace XAMLPingNET
 
                     timer.Start();
                     running_Startup_Load_Loop_Timer=true;
-                    Debug.WriteLine("started");
                 }
                 else
                 {
@@ -230,7 +233,7 @@ namespace XAMLPingNET
                     }
                     else
                     {
-                        if(frame_StartupLoad_fade != 15)
+                        if(frame_StartupLoad_fade != 30)
                         {
                             frame_StartupLoad_fade++;
                         }
@@ -242,21 +245,14 @@ namespace XAMLPingNET
                 }
             }
 
-            Debug.WriteLine("updateframe");
-            Debug.WriteLine(calltostop_StartupLoad);
-            Debug.WriteLine(stopping_StartupLoad);
-            Debug.WriteLine(frame_StartupLoad);
-            Debug.WriteLine(frame_StartupLoad_fade);
-            //Debug.WriteLine((Startup_Load.Source as BitmapImage));
-
             Startup_Load.Source = new BitmapImage(new Uri(@"pack://application:,,,/XAMLPingNET;component/resources/Sequence/Loading/load" + frame_StartupLoad.ToString("D3") + ".png"));
 
             if (frame_StartupLoad_fade != 0)
                 {
-                    panel_Startup_Load.Opacity = 1 - (frame_StartupLoad_fade/15);
+                    panel_Startup_Load.Opacity = 1 - (frame_StartupLoad_fade/30);
                 }
 
-            if (frame_StartupLoad_fade == 15)
+            if (frame_StartupLoad_fade == 30)
                 {
                     panel_Startup_Load.Visibility = Visibility.Collapsed;
                 }
