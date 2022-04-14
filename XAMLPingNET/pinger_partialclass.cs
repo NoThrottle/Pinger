@@ -350,11 +350,25 @@ namespace XAMLPingNET
                 switch (setactive)
                 {
                     case 0:
-
+                        info_logo.Visibility = Visibility.Hidden;
+                        info_brand.Text = "";
+                        //left column
+                        info_item1_text.Content = "";
+                        info_item2_text.Content = "";
+                        info_item3_text.Content = "";
+                        info_item4_text.Content = "";
+                        info_item5_text.Content = "";
+                        //right column
+                        info_item1ms_text.Content = "";
+                        info_item2ms_text.Content = "";
+                        info_item3ms_text.Content = "";
+                        info_item4ms_text.Content = "";
+                        info_item5ms_text.Content = "";
                         break;
 
                     case 1:
                         info_logo.Source = new BitmapImage (new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/google-logo.png", UriKind.Relative));
+                        info_logo.Visibility = Visibility.Visible;
                         info_brand.Text = "Google Cloud Platform"; 
                         //left column
                         info_item1_text.Content = SolveAddress(google_cloud_result);
@@ -372,6 +386,7 @@ namespace XAMLPingNET
 
                     case 2:
                         info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/aws-logo.png", UriKind.Relative));
+                        info_logo.Visibility = Visibility.Visible;
                         info_brand.Text = "Amazon Web Services";
                         //left column
                         info_item1_text.Content = SolveAddress(amazon_cloudfront_result);
@@ -389,6 +404,7 @@ namespace XAMLPingNET
 
                     case 3:
                         info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/cloudflare-logo.png", UriKind.Relative));
+                        info_logo.Visibility = Visibility.Visible;
                         info_brand.Text = "Cloudflare";
                         //left column
                         info_item1_text.Content = SolveAddress(cloudflare_site_result);
@@ -406,6 +422,7 @@ namespace XAMLPingNET
 
                     case 4:
                         info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/akamai-logo.png", UriKind.Relative));
+                        info_logo.Visibility = Visibility.Visible;
                         info_brand.Text = "Akamai Technologies";
                         //left column
                         info_item1_text.Content = SolveAddress(akamai_site_result);
@@ -423,6 +440,7 @@ namespace XAMLPingNET
 
                     case 5:
                         info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/router-wireless.png", UriKind.Relative));
+                        info_logo.Visibility = Visibility.Visible;
                         info_brand.Text = "Local Networks";
                         //left column
                         info_item1_text.Content = SolveAddress(isp_globe_result);
@@ -438,8 +456,8 @@ namespace XAMLPingNET
                         info_item5ms_text.Content = SolvePing(isp_dito_result);
                         break;
 
-
                 }
+
 
             }
             catch (Exception ex)

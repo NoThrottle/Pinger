@@ -128,7 +128,6 @@ namespace XAMLPingNET
             //Minimize in the future to tray instead of closing
         }
 
-
         #region Startup_Load_Loop
 
         bool running_Startup_Load_Loop_Timer = false;
