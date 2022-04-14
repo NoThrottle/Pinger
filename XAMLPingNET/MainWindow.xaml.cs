@@ -78,7 +78,7 @@ namespace XAMLPingNET
         {
             Console.WriteLine("ActiveButton hov detected");
 
-            ActiveButton.ToolTip = "Pinging every " + intervaltimer + " seconds.";
+            ActiveButton.ToolTip = "Pinging every " + intervaltimer + " second".Pluralizer(intervaltimer) + ".";
 
             if (activebutton_active == false)
             {

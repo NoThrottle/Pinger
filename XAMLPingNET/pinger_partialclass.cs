@@ -547,5 +547,18 @@ namespace XAMLPingNET
             else
                 throw new TimeoutException();
         }
+
+        public static string Pluralizer(this string word, double amount)
+        {
+            if (amount != 1)
+            {
+                return word + "s";
+            }
+            else
+            {
+                return word;
+            }
+        }
+
     }
 }
