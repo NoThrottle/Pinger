@@ -1,0 +1,420 @@
+﻿<fw:AcrylicWindow x:Class="XAMLPing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:local="clr-namespace:XAMLPing"
+        mc:Ignorable="d"
+        Title="PINGER" Height="616" Width="390" HorizontalAlignment="Left" VerticalAlignment="Top" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" AllowsTransparency="True" Foreground="{x:Null}"
+        MouseDown="Window_MouseDown"
+        BorderBrush="#FF121212">
+
+
+    <Grid Background="#D0121212">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42"/>
+            <RowDefinition Height="96"/>
+            <RowDefinition Height="148"/>
+            <RowDefinition Height="266"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+
+        <!--#region TitleBar-->
+        <Grid Grid.Row="0" Background="#9F0C0C0C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="67*"/>
+                <ColumnDefinition Width="221*"/>
+                <ColumnDefinition Width="44*"/>
+                <ColumnDefinition Width="44*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="34" Width="58">
+                <Label Content="PINGER" HorizontalAlignment="Center" VerticalAlignment="Center" Height="34" Width="58" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </Grid>
+
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="28">
+                <Image x:Name="Logo" HorizontalAlignment="Left" Height="24" VerticalAlignment="Center" Width="24" Stretch="Uniform" Source="/Resources/P.png" Grid.ColumnSpan="2" Margin="8
+                   ,0,0,0"/>
+            </Canvas>
+
+            <Grid Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="10,0,0,0" Width="34">
+                <Image Grid.Column="4" HorizontalAlignment="Right" Height="24" VerticalAlignment="Top" Width="24" Source="/Resources/close.png" Margin="0,0,10,0" MouseDown="Close_Click" Cursor="Hand"/>
+            </Grid>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1" Name="ActiveButton" MouseDown="ActiveButton_MouseDown" MouseEnter="ActiveButton_hoverfunc" MouseLeave="ActiveButton_hoverfunc" Cursor="Hand">
+                    <Border Name="ActiveButton_BG" BorderThickness="1" Grid.ColumnSpan="1" CornerRadius="4,4,4,4" Background="#FF6e6e6e">
+                        <Border.Effect>
+                            <DropShadowEffect x:Name="ActiveButton_Shadow" ShadowDepth="0" BlurRadius="10" Opacity="0.4" Color="#FF6e6e6e"/>
+                        </Border.Effect>
+                    </Border>
+                    <Label Name="ActiveButton_Text" Content="Active - Great" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Segoe UI Semibold" IsEnabled="False" Foreground="Black"/>
+                </Grid>
+            </Grid>
+
+
+
+
+        </Grid> <!--ActiveButton-->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Row="1">
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-33,-23,-8" CornerRadius="4,4,4,4" Background="#FF121212">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
+                    </Border.Effect>
+                </Border>
+
+                <!--BGS-->
+                <Border Name="status_item1_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,2,-23,94" Background="#FF252525" Visibility="Hidden"/>
+                <Border Name="status_item2_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,25,-23,71" Background="#FF252525" Visibility="Hidden"/>
+                <Border Name="status_item3_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,48,-23,48" Background="#FF252525" Visibility="Hidden"/>
+                <Border Name="status_item4_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,71,-23,25" Background="#FF252525" Visibility="Hidden"/>
+                <Border Name="status_item5_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,94,-23,2" Background="#FF252525" Visibility="Hidden"/>
+
+                <Grid Grid.Column="1">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                    </Grid.RowDefinitions>
+
+                    <Canvas Grid.Row="0">
+                        <Label Name="status_item1_text" Content="Google:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="1">
+                        <Label Name="status_item2_text" Content="AWS:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="2">
+                        <Label Name="status_item3_text" Content="Cloudflare:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="3">
+                        <Label Name="status_item4_text" Content="Akamai:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="4">
+                        <Label Name="status_item5_text" Content="ISP:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                    </Canvas>
+
+                </Grid>
+
+                <Grid Grid.Column="2" HorizontalAlignment="Left">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                    </Grid.RowDefinitions>
+
+                    <Canvas Grid.Row="0">
+                        <Label Name="status_item1ms_text" Content="20ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="1">
+                        <Label Name="status_item2ms_text" Content="33ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="2">
+                        <Label Name="status_item3ms_text" Content="15ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="3">
+                        <Label Name="status_item4ms_text" Content="Unavailable" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                    </Canvas>
+
+                    <Canvas Grid.Row="4">
+                        <Label Name="status_item5ms_text" Content="&lt;1ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                    </Canvas>
+
+
+
+                </Grid>
+             
+            </Grid>
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Label Content="Status:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Grid.Column="1">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="23"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Name="status_item1_hover" Grid.Row="0" MouseEnter="status_item1_hoverfunc" MouseLeave="status_item1_hoverfunc" MouseDown="status_item1_mousedown" Background="#01252525" Cursor="Hand"/>
+                    <Grid Name="status_item2_hover" Grid.Row="1" MouseEnter="status_item2_hoverfunc" MouseLeave="status_item2_hoverfunc" MouseDown="status_item2_mousedown" Background="#01252525" Cursor="Hand"/>
+                    <Grid Name="status_item3_hover" Grid.Row="2" MouseEnter="status_item3_hoverfunc" MouseLeave="status_item3_hoverfunc" MouseDown="status_item3_mousedown" Background="#01252525" Cursor="Hand"/>
+                    <Grid Name="status_item4_hover" Grid.Row="3" MouseEnter="status_item4_hoverfunc" MouseLeave="status_item4_hoverfunc" MouseDown="status_item4_mousedown" Background="#01252525" Cursor="Hand"/>
+                    <Grid Name="status_item5_hover" Grid.Row="4" MouseEnter="status_item5_hoverfunc" MouseLeave="status_item5_hoverfunc" MouseDown="status_item5_mousedown" Background="#01252525" Cursor="Hand"/>
+
+                </Grid>
+
+
+            </Grid>
+
+
+        </Grid> <!--StatusPanel-->
+
+        <Grid Name="info_panel"  Grid.Row="3" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="56"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border BorderThickness="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-3,-23,25" CornerRadius="4,4,4,4" Background="#D0121212">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
+                        </Border.Effect>
+                    </Border>
+
+                </Grid> <!--Background-->
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+                        <Image x:Name="info_logo" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" Stretch="Uniform" Source="/Resources/NonUI/Logos/aws-logo.png" Margin="0,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label.Content>
+                                <AccessText Name="info_brand" 
+                                            TextWrapping="Wrap" 
+                                            Text="Amazon Web Services" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold" 
+                                            FontFamily="Montserrat 
+                                            SemiBold" 
+                                            Foreground="White" 
+                                            FontSize="14"/>
+                            </Label.Content>
+                        </Label>
+                    </Grid>
+                    
+                </Grid>
+                
+                <Grid Grid.Row="2">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                        </Grid.RowDefinitions>
+
+                        <Canvas Grid.Row="0">
+                            <Label Name="info_item1_text" Content="10.107.256.11:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="1">
+                            <Label Name="info_item2_text" Content="28.101.101.23:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="2">
+                            <Label Name="info_item3_text" Content="107.18.29.205:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="3">
+                            <Label Name="info_item4_text" Content="259.255.17.0:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="4">
+                            <Label Name="info_item5_text" Content="Site:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                        </Canvas>
+                        
+                    </Grid>
+
+                    <Grid Grid.Column="2" HorizontalAlignment="Left">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                        </Grid.RowDefinitions>
+
+                        <Canvas Grid.Row="0">
+                            <Label Name="info_item1ms_text" Content="97ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="1">
+                            <Label Name="info_item2ms_text" Content="67ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="2">
+                            <Label Name="info_item3ms_text" Content="19ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="3">
+                            <Label Name="info_item4ms_text" Content="22ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                        </Canvas>
+
+                        <Canvas Grid.Row="4">
+                            <Label Name="info_item5ms_text" Content="101ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                        </Canvas>
+
+
+
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Row="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+                        <Label Content="Information:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+            
+        </Grid>
+        
+        
+        <Grid Grid.Row="4" Background="#9F0C0C0C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Image x:Name="tabs_Home" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/web.png" Grid.ColumnSpan="1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="1.799"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Image x:Name="tabs_Gaming" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/controller-classic-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Image x:Name="tabs_Statistics" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/chart-box-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
+            </Grid>
+
+        </Grid> <!--TabBar-->
+        
+    </Grid>
+
+</fw:AcrylicWindow>

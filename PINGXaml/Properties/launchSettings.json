@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PINGXaml (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "PINGXaml (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
