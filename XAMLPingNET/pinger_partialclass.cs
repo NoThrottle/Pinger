@@ -107,7 +107,7 @@ namespace XAMLPingNET
         //---------------//
 
         double intervaltimer = 5; //seconds
-        double uitimer = 1/30; //30fps
+        double uitimer = 1/4; //15fps
         int setactive = 0; //0 is none
 
         //---------------//
@@ -193,6 +193,7 @@ namespace XAMLPingNET
         private void UITimer_Tick(object sender, EventArgs e)
         {
             UpdateEachOne();
+            Tabs();
         }
 
         private string SolvePing(PingReply? reply)
@@ -488,6 +489,53 @@ namespace XAMLPingNET
                 Debug.WriteLine(ex);
             }
         }
+
+        int default_selected_tab = 1;
+
+        int ActiveTab = 1;
+
+        #region SetActiveTab Methods
+        private void SetActiveTab1(object sender, MouseButtonEventArgs e)
+        {
+            ActiveTab = 1;
+        }
+
+        private void SetActiveTab2(object sender, MouseButtonEventArgs e)
+        {
+            ActiveTab = 2;
+        }
+
+        private void SetActiveTab3(object sender, MouseButtonEventArgs e)
+        {
+            ActiveTab = 3;
+        }
+        #endregion  
+
+        private void Tabs()
+        {
+            switch (ActiveTab)
+            {
+                case 1:
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    break;
+
+                case 2:
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+
+                    break;
+
+                case 3:
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+                    break;
+            }
+        }
+        
     }
 
     public static class extention

@@ -393,24 +393,15 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1">
-                <Image x:Name="tabs_Home" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/web.png" Grid.ColumnSpan="1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="1.799"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
+            <Grid Name="tab1" Grid.Column="1" MouseDown="SetActiveTab1">
+                <Image x:Name="tabs_Home" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/web.png" Grid.ColumnSpan="1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"/>
             </Grid>
 
-            <Grid Grid.Column="2">
+            <Grid Name="tab2" Grid.Column="2" MouseDown="SetActiveTab2">
                 <Image x:Name="tabs_Gaming" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/controller-classic-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
             </Grid>
 
-            <Grid Grid.Column="3">
+            <Grid Name="tab3" Grid.Column="3" MouseDown="SetActiveTab3">
                 <Image x:Name="tabs_Statistics" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="32" Stretch="Uniform" Source="/Resources/Tabs/chart-box-outline.png" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
             </Grid>
 
@@ -418,7 +409,7 @@
         <!--TabBar-->
 
         <!--Dont Forget to re hide this-->
-        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Visible" Opacity="1" Background="#FF121212" >
+        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden" Opacity="1" Background="#FF121212" >
             <Image x:Name="Startup_Load" Height="96" Width="96" Stretch="Fill" Source="/Resources/Sequence/Loading/load000.png" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
         
