@@ -226,7 +226,7 @@
         </Grid>
         <!--StatusPanel-->
 
-        <Grid Name="info_panel"  Grid.Row="3" Visibility="c">
+        <Grid Name="info_panel"  Grid.Row="3" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="8*"/>
