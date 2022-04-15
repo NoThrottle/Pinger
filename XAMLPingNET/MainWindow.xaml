@@ -8,15 +8,296 @@
         mc:Ignorable="d"
         Title="PINGER" Height="616" Width="390" HorizontalAlignment="Left" VerticalAlignment="Top" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Normal" AllowsTransparency="True" Foreground="{x:Null}"
         MouseDown="Window_MouseDown"
-        BorderBrush="#FF121212">
+        BorderBrush="#FF121212"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <fw:AcrylicWindow.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FF121212"/>
+        <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ComboBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FF232323" Offset="0.0"/>
+            <GradientStop Color="#FF232323" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FF121212"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
+        <!--<SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>-->
+        <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FF404040" Offset="0.0"/>
+            <GradientStop Color="#FF404040" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF000000"/>
+        <!--<SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#FF7EB4EA"/>
+        <LinearGradientBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFEBF430" Offset="0.0"/>
+            <GradientStop Color="#FFDCECFC" Offset="1.0"/>
+        </LinearGradientBrush>-->
+        <!--<SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF7EB4EA"/>-->
+        <LinearGradientBrush x:Key="ComboBox.Pressed.Background" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FF505050" Offset="0.0"/>
+            <GradientStop Color="#FF505050" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF000000"/>
+        <!--<SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF569DE5"/>
+        <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFDAEBFC" Offset="0.0"/>
+            <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
+        </LinearGradientBrush>-->
+        <!--<SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FF569DE5"/>-->
+        <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FFF0F0F0"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FFD9D9D9"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
+        <!--<SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Border" Color="#FFBFBFBF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Button.Border" Color="Transparent"/>-->
+        <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="ClickMode" Value="Press"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="templateRoot" CornerRadius="4,4,4,4" Background="{StaticResource ComboBox.Static.Background}" BorderBrush="{StaticResource ComboBox.Static.Border}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
+                                <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource ComboBox.Static.Glyph}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Static.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Static.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Static.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Static.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.MouseOver.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.MouseOver.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.Pressed.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Pressed.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Pressed.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Pressed.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.Disabled.Glyph}"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Border}"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Editable.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource ComboBox.Disabled.Editable.Border}"/>
+                                <Setter Property="Background" TargetName="splitBorder" Value="{StaticResource ComboBox.Disabled.Editable.Button.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="splitBorder" Value="{StaticResource ComboBox.Disabled.Editable.Button.Border}"/>
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--<ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                    <theme:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border x:Name="dropDownBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1">
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </theme:SystemDropShadowChrome>
+                </Popup>
+                <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <Border x:Name="border" Background="{StaticResource TextBox.Static.Background}" Margin="{TemplateBinding BorderThickness}">
+                    <TextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                    <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
+                    <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+                <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                    <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>-->
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                    <theme:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border x:Name="dropDownBorder" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1" >
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="opaqueRect" Fill="{Binding Background, ElementName=dropDownBorder}" Height="{Binding ActualHeight, ElementName=dropDownBorder}" Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </theme:SystemDropShadowChrome>
+                </Popup>
+                <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <ContentPresenter x:Name="contentPresenter" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
+                    <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
+                    <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+                <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                    <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxDark" TargetType="{x:Type ComboBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Padding" Value="6,3,5,3"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+            <Style.Triggers>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </fw:AcrylicWindow.Resources>
 
 
     <Grid Background="#D0121212">
         <Grid.RowDefinitions>
             <RowDefinition Height="42"/>
-            <RowDefinition Height="96"/>
-            <RowDefinition Height="148"/>
-            <RowDefinition Height="266"/>
+            <RowDefinition Height="512"/>
             <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
 
@@ -44,203 +325,54 @@
         </Grid>
         <!--#endregion-->
 
-        <Grid Grid.Row="1">
-
+        <Grid Name="tab1_panel" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="1" Name="ActiveButton" MouseDown="ActiveButton_MouseDown" MouseEnter="ActiveButton_hoverfunc" MouseLeave="ActiveButton_hoverfunc" Cursor="Hand" ToolTip="Currently Not Pinging">
-                    <Border Name="ActiveButton_BG" BorderThickness="1" Grid.ColumnSpan="1" CornerRadius="4,4,4,4" Background="#FF6e6e6e">
-                        <Border.Effect>
-                            <DropShadowEffect x:Name="ActiveButton_Shadow" ShadowDepth="0" BlurRadius="10" Opacity="0.4" Color="#FF6e6e6e"/>
-                        </Border.Effect>
-                    </Border>
-                    <Label Name="ActiveButton_Text" Content="Inactive" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Segoe UI Semibold" IsEnabled="False" Foreground="Black"/>
-                </Grid>
-            </Grid>
-
-
-
-
-        </Grid>
-        <!--ActiveButton-->
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="28"/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="96"/>
+                <RowDefinition Height="148"/>
+                <RowDefinition Height="266"/>
             </Grid.RowDefinitions>
 
-
-
-            <Grid Grid.Row="1">
-
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-33,-23,-8" CornerRadius="4,4,4,4" Background="#FF121212">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
-                    </Border.Effect>
-                </Border>
-
-                <!--BGS-->
-                <Border Name="status_item1_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,2,-23,94" Background="#FF252525" Visibility="Hidden"/>
-                <Border Name="status_item2_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,25,-23,71" Background="#FF252525" Visibility="Hidden"/>
-                <Border Name="status_item3_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,48,-23,48" Background="#FF252525" Visibility="Hidden"/>
-                <Border Name="status_item4_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,71,-23,25" Background="#FF252525" Visibility="Hidden"/>
-                <Border Name="status_item5_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,94,-23,2" Background="#FF252525" Visibility="Hidden"/>
-
-                <Grid Grid.Column="1">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                    </Grid.RowDefinitions>
-
-                    <Canvas Grid.Row="0">
-                        <Label Name="status_item1_text" Content="Google:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="1">
-                        <Label Name="status_item2_text" Content="AWS:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="2">
-                        <Label Name="status_item3_text" Content="Cloudflare:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="3">
-                        <Label Name="status_item4_text" Content="Akamai:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="4">
-                        <Label Name="status_item5_text" Content="ISP:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
-                    </Canvas>
-
-                </Grid>
-
-                <Grid Grid.Column="2" HorizontalAlignment="Left">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                    </Grid.RowDefinitions>
-
-                    <Canvas Grid.Row="0">
-                        <Label Name="status_item1ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="1">
-                        <Label Name="status_item2ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="2">
-                        <Label Name="status_item3ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="3">
-                        <Label Name="status_item4ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
-                    </Canvas>
-
-                    <Canvas Grid.Row="4">
-                        <Label Name="status_item5ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
-                    </Canvas>
-
-
-
-                </Grid>
-
-            </Grid>
             <Grid Grid.Row="0">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
 
-                <Grid Grid.Column="1">
-                    <Label Content="Status:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1" Name="ActiveButton" MouseDown="ActiveButton_MouseDown" MouseEnter="ActiveButton_hoverfunc" MouseLeave="ActiveButton_hoverfunc" Cursor="Hand" ToolTip="Currently Not Pinging">
+                        <Border Name="ActiveButton_BG" BorderThickness="1" Grid.ColumnSpan="1" CornerRadius="4,4,4,4" Background="#FF6e6e6e">
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="ActiveButton_Shadow" ShadowDepth="0" BlurRadius="10" Opacity="0.4" Color="#FF6e6e6e"/>
+                            </Border.Effect>
+                        </Border>
+                        <Label Name="ActiveButton_Text" Content="Inactive" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Segoe UI Semibold" IsEnabled="False" Foreground="Black"/>
+                    </Grid>
                 </Grid>
 
-            </Grid>
 
+
+
+            </Grid>
+            <!--ActiveButton-->
             <Grid Grid.Row="1">
-
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-
-                <Grid Grid.Column="1">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                        <RowDefinition Height="23"/>
-                    </Grid.RowDefinitions>
-
-
-                    <Grid Name="status_item1_hover" Grid.Row="0" MouseEnter="status_item1_hoverfunc" MouseLeave="status_item1_hoverfunc" MouseDown="status_item1_mousedown" Background="#01252525" Cursor="Hand"/>
-                    <Grid Name="status_item2_hover" Grid.Row="1" MouseEnter="status_item2_hoverfunc" MouseLeave="status_item2_hoverfunc" MouseDown="status_item2_mousedown" Background="#01252525" Cursor="Hand"/>
-                    <Grid Name="status_item3_hover" Grid.Row="2" MouseEnter="status_item3_hoverfunc" MouseLeave="status_item3_hoverfunc" MouseDown="status_item3_mousedown" Background="#01252525" Cursor="Hand"/>
-                    <Grid Name="status_item4_hover" Grid.Row="3" MouseEnter="status_item4_hoverfunc" MouseLeave="status_item4_hoverfunc" MouseDown="status_item4_mousedown" Background="#01252525" Cursor="Hand"/>
-                    <Grid Name="status_item5_hover" Grid.Row="4" MouseEnter="status_item5_hoverfunc" MouseLeave="status_item5_hoverfunc" MouseDown="status_item5_mousedown" Background="#01252525" Cursor="Hand"/>
-
-                </Grid>
-
-
-            </Grid>
-
-
-        </Grid>
-        <!--StatusPanel-->
-
-        <Grid Name="info_panel"  Grid.Row="3" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="1" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="28"/>
-                    <RowDefinition Height="56"/>
-                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="120"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Grid.RowSpan="3">
+
+
+                <Grid Grid.Row="1">
+
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
@@ -248,54 +380,18 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border BorderThickness="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-3,-23,25" CornerRadius="4,4,4,4" Background="#D0121212">
+                    <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-33,-23,-8" CornerRadius="4,4,4,4" Background="#FF121212">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
                         </Border.Effect>
                     </Border>
 
-                </Grid>
-                <!--Background-->
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="1">
-                        <Image x:Name="info_logo" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" Stretch="Uniform" Source="/Resources/NonUI/Logos/aws-logo.png" Margin="0,0,0,0"/>
-                    </Grid>
-
-                    <Grid Grid.Column="2">
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Label.Content>
-                                <AccessText Name="info_brand" 
-                                            TextWrapping="Wrap" 
-                                            Text="Amazon Web Services" 
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontWeight="Bold" 
-                                            FontFamily="Montserrat 
-                                            SemiBold" 
-                                            Foreground="White" 
-                                            FontSize="14"/>
-                            </Label.Content>
-                        </Label>
-                    </Grid>
-
-                </Grid>
-
-                <Grid Grid.Row="2">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
+                    <!--BGS-->
+                    <Border Name="status_item1_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,2,-23,94" Background="#FF252525" Visibility="Hidden"/>
+                    <Border Name="status_item2_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,25,-23,71" Background="#FF252525" Visibility="Hidden"/>
+                    <Border Name="status_item3_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,48,-23,48" Background="#FF252525" Visibility="Hidden"/>
+                    <Border Name="status_item4_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,71,-23,25" Background="#FF252525" Visibility="Hidden"/>
+                    <Border Name="status_item5_hoverbg"  BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,94,-23,2" Background="#FF252525" Visibility="Hidden"/>
 
                     <Grid Grid.Column="1">
 
@@ -305,26 +401,27 @@
                             <RowDefinition Height="23"/>
                             <RowDefinition Height="23"/>
                             <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
                         </Grid.RowDefinitions>
 
                         <Canvas Grid.Row="0">
-                            <Label Name="info_item1_text" Content="10.107.256.11:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            <Label Name="status_item1_text" Content="Google:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
                         </Canvas>
 
                         <Canvas Grid.Row="1">
-                            <Label Name="info_item2_text" Content="28.101.101.23:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            <Label Name="status_item2_text" Content="AWS:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
                         </Canvas>
 
                         <Canvas Grid.Row="2">
-                            <Label Name="info_item3_text" Content="107.18.29.205:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            <Label Name="status_item3_text" Content="Cloudflare:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
                         </Canvas>
 
                         <Canvas Grid.Row="3">
-                            <Label Name="info_item4_text" Content="259.255.17.0:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            <Label Name="status_item4_text" Content="Akamai:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
                         </Canvas>
 
                         <Canvas Grid.Row="4">
-                            <Label Name="info_item5_text" Content="Site:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            <Label Name="status_item5_text" Content="ISP:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
                         </Canvas>
 
                     </Grid>
@@ -341,23 +438,23 @@
                         </Grid.RowDefinitions>
 
                         <Canvas Grid.Row="0">
-                            <Label Name="info_item1ms_text" Content="97ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            <Label Name="status_item1ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
                         </Canvas>
 
                         <Canvas Grid.Row="1">
-                            <Label Name="info_item2ms_text" Content="67ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            <Label Name="status_item2ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
                         </Canvas>
 
                         <Canvas Grid.Row="2">
-                            <Label Name="info_item3ms_text" Content="19ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            <Label Name="status_item3ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
                         </Canvas>
 
                         <Canvas Grid.Row="3">
-                            <Label Name="info_item4ms_text" Content="22ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            <Label Name="status_item4ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
                         </Canvas>
 
                         <Canvas Grid.Row="4">
-                            <Label Name="info_item5ms_text" Content="101ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            <Label Name="status_item5ms_text" Content="..." FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
                         </Canvas>
 
 
@@ -375,12 +472,211 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="1">
-                        <Label Content="Information:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                        <Label Content="Status:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                    </Grid>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Grid Grid.Column="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                            <RowDefinition Height="23"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Grid Name="status_item1_hover" Grid.Row="0" MouseEnter="status_item1_hoverfunc" MouseLeave="status_item1_hoverfunc" MouseDown="status_item1_mousedown" Background="#01252525" Cursor="Hand"/>
+                        <Grid Name="status_item2_hover" Grid.Row="1" MouseEnter="status_item2_hoverfunc" MouseLeave="status_item2_hoverfunc" MouseDown="status_item2_mousedown" Background="#01252525" Cursor="Hand"/>
+                        <Grid Name="status_item3_hover" Grid.Row="2" MouseEnter="status_item3_hoverfunc" MouseLeave="status_item3_hoverfunc" MouseDown="status_item3_mousedown" Background="#01252525" Cursor="Hand"/>
+                        <Grid Name="status_item4_hover" Grid.Row="3" MouseEnter="status_item4_hoverfunc" MouseLeave="status_item4_hoverfunc" MouseDown="status_item4_mousedown" Background="#01252525" Cursor="Hand"/>
+                        <Grid Name="status_item5_hover" Grid.Row="4" MouseEnter="status_item5_hoverfunc" MouseLeave="status_item5_hoverfunc" MouseDown="status_item5_mousedown" Background="#01252525" Cursor="Hand"/>
+
+                    </Grid>
+
+
+                </Grid>
+
+
+            </Grid>
+            <!--StatusPanel-->
+
+            <Grid Name="info_panel"  Grid.Row="2" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.RowSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderThickness="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="-23,-3,-23,25" CornerRadius="4,4,4,4" Background="#D0121212">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
+                            </Border.Effect>
+                        </Border>
+
+                    </Grid>
+                    <!--Background-->
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+                            <Image x:Name="info_logo" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" Stretch="Uniform" Source="/Resources/NonUI/Logos/aws-logo.png" Margin="0,0,0,0"/>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label.Content>
+                                    <AccessText Name="info_brand" 
+                                            TextWrapping="Wrap" 
+                                            Text="Amazon Web Services" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold" 
+                                            FontFamily="Montserrat 
+                                            SemiBold" 
+                                            Foreground="White" 
+                                            FontSize="14"/>
+                                </Label.Content>
+                            </Label>
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                            </Grid.RowDefinitions>
+
+                            <Canvas Grid.Row="0">
+                                <Label Name="info_item1_text" Content="10.107.256.11:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="1">
+                                <Label Name="info_item2_text" Content="28.101.101.23:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="2">
+                                <Label Name="info_item3_text" Content="107.18.29.205:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="3">
+                                <Label Name="info_item4_text" Content="259.255.17.0:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="4">
+                                <Label Name="info_item5_text" Content="Site:" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14"/>
+                            </Canvas>
+
+                        </Grid>
+
+                        <Grid Grid.Column="2" HorizontalAlignment="Left">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                                <RowDefinition Height="23"/>
+                            </Grid.RowDefinitions>
+
+                            <Canvas Grid.Row="0">
+                                <Label Name="info_item1ms_text" Content="97ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="1">
+                                <Label Name="info_item2ms_text" Content="67ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="2">
+                                <Label Name="info_item3ms_text" Content="19ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="3">
+                                <Label Name="info_item4ms_text" Content="22ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="4">
+                                <Label Name="info_item5ms_text" Content="101ms" FontWeight="Bold" FontFamily="Montserrat Medium" Foreground="White" FontSize="14" Width="132" HorizontalContentAlignment="Right"/>
+                            </Canvas>
+
+
+
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+                            <Label Content="Information:" FontWeight="Bold" FontFamily="Montserrat SemiBold" Foreground="White" FontSize="14"/>
+                        </Grid>
+
                     </Grid>
 
                 </Grid>
 
             </Grid>
+
+        </Grid>
+
+        <Grid Name="tab2_panel" Grid.Row="1" Visibility="Visible">
+
+            <ComboBox Style="{DynamicResource ComboBoxDark}" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Width="332" Height="31"/>
 
         </Grid>
 
@@ -412,7 +708,7 @@
         <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden" Opacity="1" Background="#FF121212" >
             <Image x:Name="Startup_Load" Height="96" Width="96" Stretch="Fill" Source="/Resources/Sequence/Loading/load000.png" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
-        
+
     </Grid>
 
 </fw:AcrylicWindow>
