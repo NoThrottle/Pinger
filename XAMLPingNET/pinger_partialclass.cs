@@ -193,7 +193,6 @@ namespace XAMLPingNET
         private void UITimer_Tick(object sender, EventArgs e)
         {
             UpdateEachOne();
-            Tabs();
         }
 
         private string SolvePing(PingReply? reply)
@@ -492,33 +491,37 @@ namespace XAMLPingNET
 
         int default_selected_tab = 1;
 
-        int ActiveTab = 1;
-
         #region SetActiveTab Methods
         private void SetActiveTab1(object sender, MouseButtonEventArgs e)
         {
-            ActiveTab = 1;
+            Tabs(1);
         }
 
         private void SetActiveTab2(object sender, MouseButtonEventArgs e)
         {
-            ActiveTab = 2;
+            Tabs(2);
         }
 
         private void SetActiveTab3(object sender, MouseButtonEventArgs e)
         {
-            ActiveTab = 3;
+            Tabs(3);
         }
         #endregion  
 
-        private void Tabs()
+        private void Tabs(int tab)
         {
-            switch (ActiveTab)
+            switch (tab)
             {
                 case 1:
                     tab1.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
                     tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+
+                    tab1_panel.Visibility = Visibility.Visible;
+                    tab2_panel.Visibility = Visibility.Collapsed;
+                    //tab3_panel.Visibility = Visibility.Collapsed;
+
+
                     break;
 
                 case 2:
@@ -526,12 +529,20 @@ namespace XAMLPingNET
                     tab2.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
 
+                    tab2_panel.Visibility = Visibility.Visible;
+                    tab1_panel.Visibility = Visibility.Collapsed;
+                    //tab3_panel.Visibility = Visibility.Collapsed;
                     break;
 
                 case 3:
                     tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+
+                    //tab3_panel.Visibility = Visibility.Visible;
+                    tab1_panel.Visibility = Visibility.Collapsed;
+                    tab2_panel.Visibility = Visibility.Collapsed;
+
                     break;
             }
         }

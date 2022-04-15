@@ -30,6 +30,7 @@ namespace XAMLPingNET
             Startup_Load_Loop_Timer("start");
 
             UpdateAcrylic();
+            InitiateComponentsTab2();
 
             PingEachOne();
             UpdateEachOne();
@@ -38,7 +39,6 @@ namespace XAMLPingNET
             Pinger_Timer(false);
 
             calltostop_StartupLoad = true;
-
 
         }
 
@@ -261,5 +261,7 @@ namespace XAMLPingNET
         }
 
         #endregion
+
+
     }
 }
