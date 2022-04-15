@@ -28,16 +28,8 @@ namespace XAMLPingNET
 
             InitializeComponent();
             Startup_Load_Loop_Timer("start");
-
             UpdateAcrylic();
-            InitiateComponentsTab2();
-
-            PingEachOne();
-            UpdateEachOne();
-
-            UI_Timer();
-            Pinger_Timer(false);
-
+            Tabs(1);
             calltostop_StartupLoad = true;
 
         }

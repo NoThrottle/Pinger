@@ -112,49 +112,33 @@ namespace XAMLPingNET
 
         //---------------//
 
-        private static async Task<PingReply?> PingHost(string address)
+        private void InitializeTab1()
         {
-            CancellationTokenSource s_cts = new CancellationTokenSource();
-            while (s_cts.IsCancellationRequested == false)
-            {
-                try
-                {
-                    using (Ping result = new Ping())
-                    {
-                        try
-                        {
-                            PingReply? reply = result.Send(address);
+            PingEachOne();
+            UpdateEachOne();
 
-                            if (reply.Status == IPStatus.Success)
-                            {
-                                //Debug.WriteLine("suc");
-                                return reply;
-                            }
-                            else
-                            {
-                                //Debug.WriteLine("nosuc");
-                                return null;
-                            }
-                        }
-                        catch
-                        {
-                            return null;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    return null;
-                }
-            }
-
-            Debug.WriteLine("Timed out");
-            return null;
-
+            UI_Timer();
+            Pinger_Timer(false);
         }
 
+        private void UninitializeTab1()
+        {
+            try
+            {
+                ui_timer.Stop();
+                ui_timer = null;
+            }
+            catch { }
 
+            try
+            {
+                pinger_timer.Stop();
+                pinger_timer = null;
+            }
+            catch { }
+        }
+
+        #region Timers
         DispatcherTimer pinger_timer = null;
         DispatcherTimer ui_timer = null;
 
@@ -195,6 +179,8 @@ namespace XAMLPingNET
             UpdateEachOne();
         }
 
+        #endregion
+
         private string SolvePing(PingReply? reply)
         {
 
@@ -223,6 +209,48 @@ namespace XAMLPingNET
             {
                 return "Unavailable";
             }
+
+        }
+
+        private static async Task<PingReply?> PingHost(string address)
+        {
+            CancellationTokenSource s_cts = new CancellationTokenSource();
+            while (s_cts.IsCancellationRequested == false)
+            {
+                try
+                {
+                    using (Ping result = new Ping())
+                    {
+                        try
+                        {
+                            PingReply? reply = result.Send(address);
+
+                            if (reply.Status == IPStatus.Success)
+                            {
+                                //Debug.WriteLine("suc");
+                                return reply;
+                            }
+                            else
+                            {
+                                //Debug.WriteLine("nosuc");
+                                return null;
+                            }
+                        }
+                        catch
+                        {
+                            return null;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    return null;
+                }
+            }
+
+            Debug.WriteLine("Timed out");
+            return null;
 
         }
 
@@ -489,8 +517,6 @@ namespace XAMLPingNET
             }
         }
 
-        int default_selected_tab = 1;
-
         #region SetActiveTab Methods
         private void SetActiveTab1(object sender, MouseButtonEventArgs e)
         {
@@ -513,6 +539,9 @@ namespace XAMLPingNET
             switch (tab)
             {
                 case 1:
+                    InitializeTab1();
+                    UninitializeTab2();
+
                     tab1.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
                     tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
@@ -525,6 +554,9 @@ namespace XAMLPingNET
                     break;
 
                 case 2:
+                    InitializeTab2();
+                    UninitializeTab1();
+
                     tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab2.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
@@ -535,6 +567,9 @@ namespace XAMLPingNET
                     break;
 
                 case 3:
+                    UninitializeTab1();
+                    UninitializeTab2();
+
                     tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
                     tab3.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));

@@ -25,12 +25,22 @@ namespace XAMLPingNET
             "League of Legends"
         };
 
-        private void InitiateComponentsTab2()
+        private void InitializeTab2()
         {
-            foreach (var game in game_list)
+
+            if (game_combobox.Items.Count == 0)
             {
-                game_combobox.Items.Add(game);
+                foreach (var game in game_list)
+                {
+                    game_combobox.Items.Add(game);
+                }
             }
+
+        }
+
+        private void UninitializeTab2()
+        {
+
         }
 
         public dynamic Game_Valorant(string obtain)
@@ -105,10 +115,21 @@ namespace XAMLPingNET
 
         private void tabs2_game_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                string curr = this.game_combobox.SelectedItem.ToString();
+                UpdateGameUI(curr);
+            }
+            catch 
+            {
 
-            string curr = this.game_combobox.SelectedItem.ToString();
-            UpdateGameUI(curr);
+                Debug.WriteLine("tabs2_game_combobox_selectionchanged error was suppressed. If everything is working fine, ignore this");
+
+            }
+            
         }
+
+        List<RowDefinition> rows = new List<RowDefinition>();
 
         private void UpdateGameUI(string gamename)
         {
@@ -120,8 +141,6 @@ namespace XAMLPingNET
             MethodInfo theMethod = thisType.GetMethod("Game_" + (gamename.Replace(" ", "")));
 
             Debug.WriteLine("Game_" + (gamename.Replace(" ", "")));
-
-            List<RowDefinition> rows = new List<RowDefinition>();
 
             string[,] game_ip = theMethod.Invoke(this, new object[] {"ip"}) as string[,];
             string[,] game_ipname = theMethod.Invoke(this, new object[] { "ipname" }) as string[,];
