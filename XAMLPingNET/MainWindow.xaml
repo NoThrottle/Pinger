@@ -995,12 +995,12 @@
 
                             <Grid Grid.Column="2">
 
-                                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <Label.Content>
                                         <AccessText Name="tab2_GameName" 
                                             TextWrapping="Wrap" 
                                             Text = "League of Legends" 
-                                            HorizontalAlignment="Center"
+                                            HorizontalAlignment="Left"
                                             VerticalAlignment="Center"
                                             FontWeight="Bold" 
                                             FontFamily="Montserrat 
@@ -1092,7 +1092,7 @@
         <!--TabBar-->
 
         <!--Dont Forget to re hide this-->
-        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Visible" Opacity="1" Background="#FF121212">
+        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Hidden" Opacity="1" Background="#FF121212">
             <Image x:Name="Startup_Load" Height="96" Width="96" Stretch="Fill" Source="/Resources/Sequence/Loading/load000.png" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 

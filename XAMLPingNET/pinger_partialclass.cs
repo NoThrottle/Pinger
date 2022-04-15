@@ -123,19 +123,17 @@ namespace XAMLPingNET
 
         private void UninitializeTab1()
         {
-            try
+            if (ui_timer != null)
             {
                 ui_timer.Stop();
                 ui_timer = null;
             }
-            catch { }
 
-            try
+            if (pinger_timer != null)
             {
                 pinger_timer.Stop();
                 pinger_timer = null;
             }
-            catch { }
         }
 
         #region Timers

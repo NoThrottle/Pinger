@@ -139,7 +139,7 @@ namespace XAMLPingNET
         {
             if (timer == null)
             {
-                timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1 / 60) }; // FPS is 60 so 1/60 or 1 frame every Second at 60FPS;
+                timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1 / 30) }; // FPS is 60 so 1/60 or 1 frame every Second at 60FPS;
             }
 
             timer.Tick += Startup_Load_Loop_Tick;
