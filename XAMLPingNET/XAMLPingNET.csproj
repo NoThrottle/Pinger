@@ -7,6 +7,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject></StartupObject>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>normal_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -209,6 +210,10 @@
     <None Remove="Resources\Tabs\controller-classic.png" />
     <None Remove="Resources\Tabs\web-filled.png" />
     <None Remove="Resources\Tabs\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="normal_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -416,6 +421,21 @@
     <Resource Include="Resources\Tabs\controller-classic.png" />
     <Resource Include="Resources\Tabs\web-filled.png" />
     <Resource Include="Resources\Tabs\web.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
