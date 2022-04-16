@@ -17,6 +17,7 @@
     <None Remove="Resources\Fonts\Montserrat\Montserrat-Regular.ttf" />
     <None Remove="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf" />
     <None Remove="Resources\Fonts\Montserrat\OFL.txt" />
+    <None Remove="Resources\NonUI\GameLogos\apexlegends_logo.png" />
     <None Remove="Resources\NonUI\GameLogos\valorant_logo.png" />
     <None Remove="Resources\NonUI\Logos\akamai-logo.png" />
     <None Remove="Resources\NonUI\Logos\aws-logo.png" />
@@ -228,6 +229,7 @@
     <Resource Include="Resources\Fonts\Montserrat\Montserrat-Regular.ttf" />
     <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf" />
     <Resource Include="Resources\Fonts\Montserrat\OFL.txt" />
+    <Resource Include="Resources\NonUI\GameLogos\apexlegends_logo.png" />
     <Resource Include="Resources\NonUI\GameLogos\valorant_logo.png" />
     <Resource Include="Resources\NonUI\Logos\akamai-logo.png" />
     <Resource Include="Resources\NonUI\Logos\aws-logo.png" />

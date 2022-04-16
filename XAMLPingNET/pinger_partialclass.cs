@@ -604,5 +604,10 @@ namespace XAMLPingNET
             }
         }
 
+        public static string CleanName(this string text)
+        {
+            return text.Replace(".", "").Replace(" ", "").Replace("-","_");
+        }
+
     }
 }

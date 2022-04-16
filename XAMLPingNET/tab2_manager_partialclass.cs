@@ -43,12 +43,24 @@ namespace XAMLPingNET
 
         }
 
+        private void Tab2_ResetToDefault()
+        {
+            if (game_details_right.RowDefinitions.Count != 1)
+            {
+                game_details_left.Children.RemoveRange(1,game_details_left.Children.Count - 1);
+                game_details_right.Children.RemoveRange(1, game_details_right.Children.Count - 1);
+                game_details_right.RowDefinitions.RemoveRange(1, game_details_right.RowDefinitions.Count() - 1);
+                game_details_left.RowDefinitions.RemoveRange(1, game_details_left.RowDefinitions.Count() - 1);
+            }
+
+        }
+
         public dynamic Game_Valorant(string obtain)
         {
             //Valorant
 
             //Test Server IP Addresses
-            string[,] game_ip_valorant = new string[,]
+            string[,] game_ip = new string[,]
             {
             {"103.247.139.18",""},//Asia-Pacific
             {"27.111.229.182",""},
@@ -58,27 +70,27 @@ namespace XAMLPingNET
             {"206.81.81.42",""},
             {"206.165.167.42",""},
             {"189.125.250.34",""},
-            {"99.83.199.240]","75.2.105.73"}, //may be inaccurate
+            {"99.83.199.240","75.2.105.73"}, //may be inaccurate
             {"75.2.66.166","99.83.136.104"}, //may be inaccurate
             };
 
             //Server Name
-            string[,] game_ipname_valorant = new string[,]
+            string[,] game_ipname = new string[,]
             {
-            {"HK","Hong Kong"},
-            {"SG","Singapore"},
-            {"KR","Korea"},
-            {"EU","Europe"},
-            {"EU-ER","Europe-Eastern Russia"},
-            {"NA","North America"},
-            {"LATAM","Latin America and Chile"},
-            {"BR","Brazil"},
-            {"BH","Bahrain"},
+            {"Hong Kong","HK"},
+            {"Singapore","SG"},
+            {"Korea","KR"},
+            {"Europe","EE"},
+            {"Europe-Eastern Russia","EU-ER"},
+            {"North America","NA"},
+            {"Latin America and Chile","LATAM"},
+            {"Brazil","BR"},
+            {"Bahrain","BH"},
             {"Mumbai","Mumbai"},
             };
 
             //Server Name
-            bool[,] game_ipaccuracy_valorant = new bool[,]
+            bool[,] game_ipaccuracy = new bool[,]
             {
             {false},
             {false},
@@ -92,21 +104,108 @@ namespace XAMLPingNET
             {true},
             };
 
-            int game_tps_valorant = 128;
+            int game_tps = 128;
 
             switch (obtain)
             {
                 case "ip":
-                    return game_ip_valorant;
+                    return game_ip;
 
                 case "ipname":
-                    return game_ipname_valorant;
+                    return game_ipname;
 
                 case "ipaccuracy":
-                    return game_ipaccuracy_valorant;
+                    return game_ipaccuracy;
 
                 case "tps":
-                    return game_tps_valorant;
+                    return game_tps;
+
+                default:
+                    throw new Exception("Incorrect string of obtaining values from game");
+            }
+        }
+
+        public dynamic Game_ApexLegends(string obtain)
+        {
+
+            //Test Server IP Addresses
+            string[,] game_ip = new string[,]
+            {
+                {"107.182.233.168","","","","",""},
+                {"104.198.102.93","104.198.101.253","52.40.240.176","52.42.44.79","",""},
+                {"209.239.121.82","","","","",""},
+                {"63.251.239.123","","","","",""},
+                {"130.211.193.234","104.197.17.180","104.197.136.10","104.197.42.178","",""},
+                {"107.150.147.67","","","","",""},
+                {"104.196.43.45","35.196.104.104","104.196.8.33","","",""},
+                {"52.6.64.33","52.86.226.95","","","",""},
+
+                {"177.54.152.31","52.67.92.122","52.67.31.204","","",""},
+                {"217.147.89.101","","","","",""},
+                {"64.95.100.189","","","","",""},
+                {"146.148.120.92","104.155.80.155","130.211.51.110","","",""},
+                {"52.58.81.34","52.59.121.244","","","",""},
+                {"69.88.135.37","","","","",""},
+                {"104.155.233.79","104.199.182.138","","","",""},
+                {"72.5.161.228","35.185.189.243","35.185.189.104","","",""},
+                {"161.202.72.179","104.198.82.36","104.198.82.65","104.198.88.214","52.69.157.152","52.197.77.217"},
+                {"27.50.72.162","35.197.166.13","35.201.19.135","52.63.136.88","52.62.160.212",""}
+            };
+
+            //Server Name
+            string[,] game_ipname = new string[,]
+            {
+                {"NA - Salt Lake City"},
+                {"NA - Oregon"},
+                {"NA - St.Louis"},
+                {"NA - Dallas"},
+                {"NA - Iowa"},
+                {"NA - New York"},
+                {"NA - South Carolina"},
+                {"NA - Virginia"},
+                
+                {"Brazil"},
+                {"UK"},
+                {"Amsterdam"},
+                {"Belgium"},
+                {"Germany"},
+                {"Hong Kong"},
+                {"Taiwan"},
+                {"Singapore"},
+                {"Tokyo"},
+                {"Sydney"}
+            };
+
+            //Server Name
+            bool[,] game_ipaccuracy = new bool[,]
+            {
+            {false},
+            {false},
+            {false},
+            {false},
+            {true},
+            {false},
+            {false},
+            {false},
+            {true},
+            {true},
+            };
+
+            int game_tps = 20;
+
+            switch (obtain)
+            {
+                case "ip":
+                    return game_ip;
+
+                case "ipname":
+                    return game_ipname;
+
+                case "ipaccuracy":
+                    return game_ipaccuracy;
+
+                case "tps":
+                    return game_tps;
 
                 default:
                     throw new Exception("Incorrect string of obtaining values from game");
@@ -117,12 +216,15 @@ namespace XAMLPingNET
         {
             try
             {
+                Tab2_ResetToDefault();
                 string curr = this.game_combobox.SelectedItem.ToString();
+                Debug.WriteLine(curr + " wwwwwwwwww-----------------------wdwihbdw");
+
                 UpdateGameUI(curr);
             }
-            catch 
+            catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.ToString());
                 Debug.WriteLine("tabs2_game_combobox_selectionchanged error was suppressed. If everything is working fine, ignore this");
 
             }
@@ -147,14 +249,13 @@ namespace XAMLPingNET
             bool[,] game_ipaccuracy = theMethod.Invoke(this, new object[] { "ipaccuracy" }) as bool[,];
 
             //leftrow
-
             int s = 0;
             while (s != game_ipname.GetLength(0))
             {
 
-                var ip = game_ipname[s,1];
+                var ip = game_ipname[s,0];
                 RowDefinition newrow = new RowDefinition();
-                newrow.Name = "row_" + gamename + ip.Replace(" ","").Replace("-","_");
+                newrow.Name = "row_" + gamename.CleanName() + ip.CleanName();
                 newrow.Height = new GridLength(28);
 
                 rows.Add(newrow);
@@ -180,9 +281,9 @@ namespace XAMLPingNET
             while (s != game_ip.GetLength(0))
             {
 
-                var ip = game_ip[s, 1];
+                var ip = game_ip[s, 0];
                 RowDefinition newrow = new RowDefinition();
-                newrow.Name = "row_" + gamename + ip.Replace(".", "_");
+                newrow.Name = "row_" + gamename.CleanName() + ip.CleanName();
                 newrow.Height = new GridLength(28);
 
                 rows.Add(newrow);
@@ -205,8 +306,6 @@ namespace XAMLPingNET
                 Grid.SetRow(g, s + 1);
                 s++;
             }
-
-
 
             tab2_panel_game.Visibility = Visibility.Visible;
         }

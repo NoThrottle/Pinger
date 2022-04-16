@@ -116,7 +116,7 @@ namespace XAMLPingNET
         private void UpdateAcrylic()
         {
             //WindowColor
-            AcrylicWindowStyle = SourceChord.FluentWPF.AcrylicWindowStyle.Normal;
+            //AcrylicWindowStyle = SourceChord.FluentWPF.AcrylicWindowStyle.Normal;
             TintColor = Color.FromArgb(255, 12, 12, 12);
             FallbackColor = Color.FromArgb(205, 23, 23, 23);
             NoiseOpacity = (double)0.015;
