@@ -334,6 +334,10 @@ namespace XAMLPingNET
                 game_details_right.Children.Add(g2);
                 Grid.SetRow(g2, s + 1);
 
+                RegisterName(l2.Name,l2);
+                RegisterName(g2.Name,g2);
+                RegisterName(newrow2.Name,newrow2);
+
                 s++;
             }
 
@@ -345,7 +349,7 @@ namespace XAMLPingNET
             Task.Run(() =>
             {
 
-                Take2UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, /*active_gamename, active_ipname, */active_gridlist.ToArray());
+                UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, active_gridlist.ToArray());
 
             });
 
@@ -399,12 +403,12 @@ namespace XAMLPingNET
             Task.Run(() =>
             {
 
-                Take2UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, /*active_gamename, active_ipname, */active_gridlist.ToArray());
+                UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, active_gridlist.ToArray());
 
             });
         }
 
-        private void Take2UpdatePingRead(string[,] iplist, bool[,] ipaccuracy, List<Label> labellist, /*string gamename, string[,] ipname,*/ Grid[] gridlist)
+        private void UpdatePingRead(string[,] iplist, bool[,] ipaccuracy, List<Label> labellist, Grid[] gridlist)
         {
 
             Debug.WriteLine("pinged");
@@ -444,27 +448,6 @@ namespace XAMLPingNET
 
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    ////try
-                    ////{
-                    //    var rownt = (Label)gridlist[i].FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
-                    //    Debug.WriteLine("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
-                    //    Debug.WriteLine(rownt.Name);
-
-                    //    Grid gridref = (Grid)game_details_right.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_grid");
-                    //    Debug.WriteLine("this" + gridref.Name);
-                    //    RowDefinition rowdef = (RowDefinition)gridref.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName());
-                    //    Debug.WriteLine("this" + rowdef.Name);
-                    //    Label torefer = (Label)rowdef.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
-                    //    Debug.WriteLine(torefer);
-
-                    //    torefer.Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
-                    //    torefer.ToolTip = string.Join(Environment.NewLine, tooltip);
-
-                    ////}
-                    ////catch(Exception e)
-                    ////{
-                    ////    Debug.WriteLine(e);
-                    ////}
 
                     try
                     {
@@ -481,72 +464,6 @@ namespace XAMLPingNET
             }
         }
 
-
-        private void UpdatePdingRead(string[,] iplist, string[,] ipname, string gamename)
-        {
-            int x = 0;
-            while (x != iplist.GetLength(0))
-            {
-                List<string> ips = new List<string>();
-
-                int y = 0;
-                while (y != iplist.GetLength(1)-1)
-                {
-                    string ip = iplist[x, y];
-
-                    if (ip != "")
-                    {
-                        ips.Add(ip);
-                    }
-
-                    foreach (string ip_ in ips)
-                    {
-                        Debug.WriteLine("---" + ip_);
-                    }                  
-                    y++;
-                }
-
-                int i = 0;
-                string tochange = "Error";
-
-                if (ips.Count != 0)
-                {
-
-                    List<PingReply?> replies = new List<PingReply>();
-
-                    while (i != ips.Count)
-                    {
-                        string s = ips[i];
-
-                        Debug.WriteLine(s);
-                        replies.Add(PingHost(s).Result);
-                    }
-
-                    if (replies.Count > 1)
-                    {
-                        tochange = Summary(replies.ToArray());
-                    }
-                    else if (replies.Count == 1)
-                    {
-                        tochange = SolvePing(replies[0]);
-                    }
-                    else
-                    {
-                        tochange = "Error";
-                    }
-                    
-
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        listlabelsping[i].Content = tochange;
-                    }));
-
-                    i++;
-                }
-
-                x++;
-            }
-        }
     }
 
     class PacketLoss
