@@ -18,7 +18,7 @@ namespace XAMLPingNET
     public partial class MainWindow
     {
 
-        string[] game_list = new string[] 
+        string[] game_list = new string[]
         {
             "Valorant",
             "Apex Legends",
@@ -36,9 +36,9 @@ namespace XAMLPingNET
                 }
             }
 
-            if ((active_iplist != null)) 
-            { 
-            
+            if ((active_iplist != null))
+            {
+
                 Game_Pinger_Timer_func("start");
             }
 
@@ -53,7 +53,7 @@ namespace XAMLPingNET
         {
             if (game_details_right.RowDefinitions.Count != 1)
             {
-                game_details_left.Children.RemoveRange(1,game_details_left.Children.Count - 1);
+                game_details_left.Children.RemoveRange(1, game_details_left.Children.Count - 1);
                 game_details_right.Children.RemoveRange(1, game_details_right.Children.Count - 1);
                 game_details_right.RowDefinitions.RemoveRange(1, game_details_right.RowDefinitions.Count() - 1);
                 game_details_left.RowDefinitions.RemoveRange(1, game_details_left.RowDefinitions.Count() - 1);
@@ -64,6 +64,7 @@ namespace XAMLPingNET
             rows.Clear();
             rows2.Clear();
             listlabelsping.Clear();
+            active_gridlist.Clear();
 
         }
 
@@ -175,7 +176,7 @@ namespace XAMLPingNET
                 {"NA - New York"},
                 {"NA - South Carolina"},
                 {"NA - Virginia"},
-                
+
                 {"Brazil"},
                 {"UK"},
                 {"Amsterdam"},
@@ -250,17 +251,18 @@ namespace XAMLPingNET
                 Debug.WriteLine("tabs2_game_combobox_selectionchanged error was suppressed. If everything is working fine, ignore this");
 
             }
-            
+
         }
 
         List<RowDefinition> rows = new List<RowDefinition>();
         List<RowDefinition> rows2 = new List<RowDefinition>();
         List<Label> listlabelsping = new List<Label>();
+        List<Grid> active_gridlist = new List<Grid>();
 
         private void UpdateGameUI(string gamename)
         {
 
-            tab2_GameLogo.Source = new BitmapImage(new Uri(@"pack://application:,,,/XAMLPingNET;component/resources/NonUI/GameLogos/" + gamename.Replace(" ","") + "_logo.png"));
+            tab2_GameLogo.Source = new BitmapImage(new Uri(@"pack://application:,,,/XAMLPingNET;component/resources/NonUI/GameLogos/" + gamename.Replace(" ", "") + "_logo.png"));
             tab2_GameName.Text = gamename;
 
             Type thisType = this.GetType();
@@ -268,7 +270,7 @@ namespace XAMLPingNET
 
             Debug.WriteLine("Game_" + (gamename.Replace(" ", "")));
 
-            string[,] game_ip = theMethod.Invoke(this, new object[] {"ip"}) as string[,];
+            string[,] game_ip = theMethod.Invoke(this, new object[] { "ip" }) as string[,];
             string[,] game_ipname = theMethod.Invoke(this, new object[] { "ipname" }) as string[,];
             bool[,] game_ipaccuracy = theMethod.Invoke(this, new object[] { "ipaccuracy" }) as bool[,];
 
@@ -277,7 +279,7 @@ namespace XAMLPingNET
             while (s != game_ipname.GetLength(0))
             {
 
-                var ip = game_ipname[s,0];
+                var ip = game_ipname[s, 0];
                 RowDefinition newrow = new RowDefinition();
                 newrow.Name = "column_" + gamename.CleanName() + ip.CleanName();
                 newrow.Height = new GridLength(28);
@@ -289,16 +291,17 @@ namespace XAMLPingNET
                 var g = new Grid { };
                 var l = new Label
                 {
-                    Foreground = new SolidColorBrush(Color.FromRgb(255,255,255)),
+                    Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
                     FontFamily = new System.Windows.Media.FontFamily("Montserrat Regular"),
                     FontSize = 12,
-                    Content = ip,                    
+                    Content = ip,
                 };
 
                 g.Children.Add(l);
                 game_details_left.Children.Add(g);
-                Grid.SetRow(g, s+1);
+                Grid.SetRow(g, s + 1);
 
+                //----------------//
 
                 RowDefinition newrow2 = new RowDefinition();
                 newrow2.Name = "column2_" + gamename.CleanName() + ip.CleanName();
@@ -310,7 +313,8 @@ namespace XAMLPingNET
 
                 game_details_right.RowDefinitions.Add(newrow2);
 
-                var g2 = new Grid { };
+                var g2 = new Grid { Name = "column2_" + gamename.CleanName() + ip.CleanName() + "_grid", };
+                active_gridlist.Add(g2);
                 var l2 = new Label
                 {
                     Name = "column2_" + gamename.CleanName() + ip.CleanName() + "_text",
@@ -321,6 +325,8 @@ namespace XAMLPingNET
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     HorizontalAlignment = HorizontalAlignment.Right,
                 };
+
+                Debug.WriteLine("column2_" + gamename.CleanName() + ip.CleanName() + "_text");
 
                 listlabelsping.Add(l2);
 
@@ -333,11 +339,13 @@ namespace XAMLPingNET
 
             active_iplist = game_ip;
             active_ipaccuracy = game_ipaccuracy;
+            active_gamename = gamename;
+            active_ipname = game_ipname;
 
             Task.Run(() =>
             {
 
-                Take2UpdatePingRead(active_iplist, active_ipaccuracy);
+                Take2UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, /*active_gamename, active_ipname, */active_gridlist.ToArray());
 
             });
 
@@ -349,7 +357,7 @@ namespace XAMLPingNET
         DispatcherTimer game_pinger_timer = null;
         private void Game_Pinger_Timer_func(string state)
         {
-            
+
             switch (state)
             {
                 case "start":
@@ -360,9 +368,9 @@ namespace XAMLPingNET
                     }
                     else
                     {
-                        game_pinger_timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(5)};
+                        game_pinger_timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
                         game_pinger_timer.Tick += UpdatePingRead_tick;
-                        
+
                         game_pinger_timer.Start();
                     }
                     break;
@@ -382,23 +390,24 @@ namespace XAMLPingNET
         }
 
         string[,] active_iplist = null;
+        string[,] active_ipname = null;
         bool[,] active_ipaccuracy = null;
+        string active_gamename = null;
 
         private void UpdatePingRead_tick(object sender, EventArgs e)
         {
-            Task.Run(() => 
-            { 
+            Task.Run(() =>
+            {
 
-            Take2UpdatePingRead(active_iplist, active_ipaccuracy);
+                Take2UpdatePingRead(active_iplist, active_ipaccuracy, listlabelsping, /*active_gamename, active_ipname, */active_gridlist.ToArray());
 
             });
         }
 
-
-        //foreach of iplist x, ping every y of x as long as y is not "". If the number of replies are exactly 1, solve for ping then send it to dispatcher. if not, summate then send.
-
-        private void Take2UpdatePingRead(string[,] iplist, bool [,] ipaccuracy)
+        private void Take2UpdatePingRead(string[,] iplist, bool[,] ipaccuracy, List<Label> labellist, /*string gamename, string[,] ipname,*/ Grid[] gridlist)
         {
+
+            Debug.WriteLine("pinged");
             for(int i = 0; i < iplist.GetLength(0); i++)
             {
                 List<PingReply?> reply = new List<PingReply?>();
@@ -407,7 +416,7 @@ namespace XAMLPingNET
 
                 if (ipaccuracy[i, 0] == true)
                 {
-                    tooltip.Add("The accuracy of results from this" + Environment.NewLine + "test may be questionable." + Environment.NewLine);
+                    tooltip.Add("The accuracy of results from this" + Environment.NewLine + "IP test may be questionable." + Environment.NewLine);
                 };
 
                 for (int a = 0; a < iplist.GetLength(1); a++)
@@ -435,8 +444,38 @@ namespace XAMLPingNET
 
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    listlabelsping[i].Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
-                    listlabelsping[i].ToolTip = string.Join(Environment.NewLine,tooltip);
+                    ////try
+                    ////{
+                    //    var rownt = (Label)gridlist[i].FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
+                    //    Debug.WriteLine("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
+                    //    Debug.WriteLine(rownt.Name);
+
+                    //    Grid gridref = (Grid)game_details_right.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_grid");
+                    //    Debug.WriteLine("this" + gridref.Name);
+                    //    RowDefinition rowdef = (RowDefinition)gridref.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName());
+                    //    Debug.WriteLine("this" + rowdef.Name);
+                    //    Label torefer = (Label)rowdef.FindName("column2_" + gamename.CleanName() + ipname[i, 0].CleanName() + "_text");
+                    //    Debug.WriteLine(torefer);
+
+                    //    torefer.Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
+                    //    torefer.ToolTip = string.Join(Environment.NewLine, tooltip);
+
+                    ////}
+                    ////catch(Exception e)
+                    ////{
+                    ////    Debug.WriteLine(e);
+                    ////}
+
+                    try
+                    {
+                        var label = (Label)gridlist[i].FindName(labellist[i].Name);
+                        label.Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
+                        label.ToolTip = string.Join(Environment.NewLine, tooltip);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }
 
                 }));
             }
