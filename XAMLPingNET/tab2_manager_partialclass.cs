@@ -36,11 +36,21 @@ namespace XAMLPingNET
                 }
             }
 
+            if ((active_gamename != null) && (active_iplist != null)) 
+            { 
+            
+                Game_Pinger_Timer_func("start");
+
+                rows.Clear();
+                rows2.Clear();
+                listlabelsping.Clear();
+            }
+
         }
 
         private void UninitializeTab2()
         {
-
+            Game_Pinger_Timer_func("stop");
         }
 
         private void Tab2_ResetToDefault()
@@ -52,6 +62,8 @@ namespace XAMLPingNET
                 game_details_right.RowDefinitions.RemoveRange(1, game_details_right.RowDefinitions.Count() - 1);
                 game_details_left.RowDefinitions.RemoveRange(1, game_details_left.RowDefinitions.Count() - 1);
             }
+
+
 
         }
 
@@ -232,6 +244,8 @@ namespace XAMLPingNET
         }
 
         List<RowDefinition> rows = new List<RowDefinition>();
+        List<RowDefinition> rows2 = new List<RowDefinition>();
+        List<Label> listlabelsping = new List<Label>();
 
         private void UpdateGameUI(string gamename)
         {
@@ -255,7 +269,7 @@ namespace XAMLPingNET
 
                 var ip = game_ipname[s,0];
                 RowDefinition newrow = new RowDefinition();
-                newrow.Name = "row_" + gamename.CleanName() + ip.CleanName();
+                newrow.Name = "column_" + gamename.CleanName() + ip.CleanName();
                 newrow.Height = new GridLength(28);
 
                 rows.Add(newrow);
@@ -274,25 +288,22 @@ namespace XAMLPingNET
                 g.Children.Add(l);
                 game_details_left.Children.Add(g);
                 Grid.SetRow(g, s+1);
-                s++;
-            }
 
-            s = 0;
-            while (s != game_ip.GetLength(0))
-            {
 
-                var ip = game_ip[s, 0];
-                RowDefinition newrow = new RowDefinition();
-                newrow.Name = "row_" + gamename.CleanName() + ip.CleanName();
-                newrow.Height = new GridLength(28);
+                RowDefinition newrow2 = new RowDefinition();
+                newrow2.Name = "column2_" + gamename.CleanName() + ip.CleanName();
 
-                rows.Add(newrow);
+                Debug.WriteLine(newrow2.Name);
+                newrow2.Height = new GridLength(28);
 
-                game_details_right.RowDefinitions.Add(newrow);
+                rows2.Add(newrow2);
 
-                var g = new Grid { };
-                var l = new Label
+                game_details_right.RowDefinitions.Add(newrow2);
+
+                var g2 = new Grid { };
+                var l2 = new Label
                 {
+                    Name = "column2_" + gamename.CleanName() + ip.CleanName() + "_text",
                     Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
                     FontFamily = new System.Windows.Media.FontFamily("Montserrat Regular"),
                     FontSize = 12,
@@ -301,15 +312,195 @@ namespace XAMLPingNET
                     HorizontalAlignment = HorizontalAlignment.Right,
                 };
 
-                g.Children.Add(l);
-                game_details_right.Children.Add(g);
-                Grid.SetRow(g, s + 1);
+                listlabelsping.Add(l2);
+
+                g2.Children.Add(l2);
+                game_details_right.Children.Add(g2);
+                Grid.SetRow(g2, s + 1);
+
+
+
                 s++;
             }
 
+            //s = 0;
+            //while (s != game_ip.GetLength(0))
+            //{
+
+            //    var ip = game_ip[s, 0];
+
+            //    s++;
+            //}
+
+            Task.Run(() =>
+            {
+
+                Take2UpdatePingRead(active_iplist, active_ipname, active_gamename);
+
+            });
+
             tab2_panel_game.Visibility = Visibility.Visible;
+
+            active_iplist = game_ip;
+            active_ipname = game_ipname;
+            active_gamename = gamename;
+            Game_Pinger_Timer_func("start");
         }
 
+
+        DispatcherTimer game_pinger_timer = null;
+        private void Game_Pinger_Timer_func(string state)
+        {
+            
+            switch (state)
+            {
+                case "start":
+
+                    if (game_pinger_timer != null)
+                    {
+                        game_pinger_timer.Start();
+                    }
+                    else
+                    {
+                        game_pinger_timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(5)};
+                        game_pinger_timer.Tick += UpdatePingRead_tick;
+                        
+                        game_pinger_timer.Start();
+                    }
+                    break;
+
+                case "stop":
+
+                    if (game_pinger_timer != null)
+                    {
+                        game_pinger_timer.Stop();
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Game_Pinger_Timer is requested to be stopped but has not started ever.");
+                    }
+                    break;
+            }
+        }
+
+        string[,] active_iplist = null;
+        string[,] active_ipname = null;
+        string active_gamename = null;
+
+        private void UpdatePingRead_tick(object sender, EventArgs e)
+        {
+            Task.Run(() => 
+            { 
+
+            Take2UpdatePingRead(active_iplist, active_ipname ,active_gamename);
+
+            });
+        }
+
+
+        //foreach of iplist x, ping every y of x as long as y is not "". If the number of replies are exactly 1, solve for ping then send it to dispatcher. if not, summate then send.
+
+        private void Take2UpdatePingRead(string[,] iplist, string [,] ipname, string gamename)
+        {
+            for(int i = 0; i < iplist.GetLength(0); i++)
+            {
+                List<PingReply?> reply = new List<PingReply?>();
+                string toreturn = "";
+
+                for (int a = 0; a < iplist.GetLength(1); a++)
+                {
+                    if (iplist[i, a] != "")
+                    {
+                        reply.Add(PingHost(iplist[i, a]).Result);
+                    }
+                }
+
+                if (reply.Count > 1)
+                {
+                    toreturn = Summary(reply.ToArray());
+                }
+                else if (reply.Count == 1)
+                {
+                    toreturn = SolvePing(reply[0]);
+                }
+                else
+                {
+                    toreturn = "Error";
+                }
+
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    listlabelsping[i].Content = toreturn;
+                }));
+            }
+        }
+
+
+        private void UpdatePdingRead(string[,] iplist, string[,] ipname, string gamename)
+        {
+            int x = 0;
+            while (x != iplist.GetLength(0))
+            {
+                List<string> ips = new List<string>();
+
+                int y = 0;
+                while (y != iplist.GetLength(1)-1)
+                {
+                    string ip = iplist[x, y];
+
+                    if (ip != "")
+                    {
+                        ips.Add(ip);
+                    }
+
+                    foreach (string ip_ in ips)
+                    {
+                        Debug.WriteLine("---" + ip_);
+                    }                  
+                    y++;
+                }
+
+                int i = 0;
+                string tochange = "Error";
+
+                if (ips.Count != 0)
+                {
+
+                    List<PingReply?> replies = new List<PingReply>();
+
+                    while (i != ips.Count)
+                    {
+                        string s = ips[i];
+
+                        Debug.WriteLine(s);
+                        replies.Add(PingHost(s).Result);
+                    }
+
+                    if (replies.Count > 1)
+                    {
+                        tochange = Summary(replies.ToArray());
+                    }
+                    else if (replies.Count == 1)
+                    {
+                        tochange = SolvePing(replies[0]);
+                    }
+                    else
+                    {
+                        tochange = "Error";
+                    }
+                    
+
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        listlabelsping[i].Content = tochange;
+                    }));
+
+                    i++;
+                }
+
+                x++;
+            }
+        }
     }
 
     class PacketLoss
