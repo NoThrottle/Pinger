@@ -36,14 +36,10 @@ namespace XAMLPingNET
                 }
             }
 
-            if ((active_gamename != null) && (active_iplist != null)) 
+            if ((active_iplist != null)) 
             { 
             
                 Game_Pinger_Timer_func("start");
-
-                rows.Clear();
-                rows2.Clear();
-                listlabelsping.Clear();
             }
 
         }
@@ -63,7 +59,11 @@ namespace XAMLPingNET
                 game_details_left.RowDefinitions.RemoveRange(1, game_details_left.RowDefinitions.Count() - 1);
             }
 
-
+            active_ipaccuracy = null;
+            active_iplist = null;
+            rows.Clear();
+            rows2.Clear();
+            listlabelsping.Clear();
 
         }
 
@@ -79,7 +79,7 @@ namespace XAMLPingNET
             {"210.176.150.254",""},
             {"195.66.226.186",""},
             {"13.248.220.97","76.223.72.224"},//may be inaccurate
-            {"206.81.81.42",""},
+            {"206.81.81.42","120.28.10.150"}, //may be inaccurate
             {"206.165.167.42",""},
             {"189.125.250.34",""},
             {"99.83.199.240","75.2.105.73"}, //may be inaccurate
@@ -191,16 +191,24 @@ namespace XAMLPingNET
             //Server Name
             bool[,] game_ipaccuracy = new bool[,]
             {
-            {false},
-            {false},
-            {false},
-            {false},
-            {true},
-            {false},
-            {false},
-            {false},
-            {true},
-            {true},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
+                {false},
             };
 
             int game_tps = 20;
@@ -226,6 +234,8 @@ namespace XAMLPingNET
 
         private void tabs2_game_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            game_combobox_default.Visibility = Visibility.Collapsed;
+
             try
             {
                 Tab2_ResetToDefault();
@@ -318,32 +328,20 @@ namespace XAMLPingNET
                 game_details_right.Children.Add(g2);
                 Grid.SetRow(g2, s + 1);
 
-
-
                 s++;
             }
 
-            //s = 0;
-            //while (s != game_ip.GetLength(0))
-            //{
-
-            //    var ip = game_ip[s, 0];
-
-            //    s++;
-            //}
+            active_iplist = game_ip;
+            active_ipaccuracy = game_ipaccuracy;
 
             Task.Run(() =>
             {
 
-                Take2UpdatePingRead(active_iplist, active_ipname, active_gamename);
+                Take2UpdatePingRead(active_iplist, active_ipaccuracy);
 
             });
 
             tab2_panel_game.Visibility = Visibility.Visible;
-
-            active_iplist = game_ip;
-            active_ipname = game_ipname;
-            active_gamename = gamename;
             Game_Pinger_Timer_func("start");
         }
 
@@ -384,15 +382,14 @@ namespace XAMLPingNET
         }
 
         string[,] active_iplist = null;
-        string[,] active_ipname = null;
-        string active_gamename = null;
+        bool[,] active_ipaccuracy = null;
 
         private void UpdatePingRead_tick(object sender, EventArgs e)
         {
             Task.Run(() => 
             { 
 
-            Take2UpdatePingRead(active_iplist, active_ipname ,active_gamename);
+            Take2UpdatePingRead(active_iplist, active_ipaccuracy);
 
             });
         }
@@ -400,18 +397,26 @@ namespace XAMLPingNET
 
         //foreach of iplist x, ping every y of x as long as y is not "". If the number of replies are exactly 1, solve for ping then send it to dispatcher. if not, summate then send.
 
-        private void Take2UpdatePingRead(string[,] iplist, string [,] ipname, string gamename)
+        private void Take2UpdatePingRead(string[,] iplist, bool [,] ipaccuracy)
         {
             for(int i = 0; i < iplist.GetLength(0); i++)
             {
                 List<PingReply?> reply = new List<PingReply?>();
+                List<string> tooltip = new List<string>();
                 string toreturn = "";
+
+                if (ipaccuracy[i, 0] == true)
+                {
+                    tooltip.Add("The accuracy of results from this" + Environment.NewLine + "test may be questionable." + Environment.NewLine);
+                };
 
                 for (int a = 0; a < iplist.GetLength(1); a++)
                 {
                     if (iplist[i, a] != "")
                     {
-                        reply.Add(PingHost(iplist[i, a]).Result);
+                        var z = PingHost(iplist[i, a]).Result;
+                        reply.Add(z);
+                        tooltip.Add(iplist[i, a] + ": - " + SolvePing(z));
                     }
                 }
 
@@ -430,7 +435,9 @@ namespace XAMLPingNET
 
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    listlabelsping[i].Content = toreturn;
+                    listlabelsping[i].Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
+                    listlabelsping[i].ToolTip = string.Join(Environment.NewLine,tooltip);
+
                 }));
             }
         }
