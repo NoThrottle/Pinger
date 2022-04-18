@@ -115,8 +115,6 @@ namespace XAMLPingNET
 
         private void UpdateAcrylic()
         {
-            //WindowColor
-            //AcrylicWindowStyle = SourceChord.FluentWPF.AcrylicWindowStyle.Normal;
             TintColor = Color.FromArgb(255, 12, 12, 12);
             FallbackColor = Color.FromArgb(205, 23, 23, 23);
             NoiseOpacity = (double)0.015;
@@ -240,14 +238,14 @@ namespace XAMLPingNET
             Startup_Load.Source = new BitmapImage(new Uri(@"pack://application:,,,/XAMLPingNET;component/resources/Sequence/Loading/load" + frame_StartupLoad.ToString("D3") + ".png"));
 
             if (frame_StartupLoad_fade != 0)
-                {
-                    panel_Startup_Load.Opacity = 1 - (frame_StartupLoad_fade/30);
-                }
+            {
+                panel_Startup_Load.Opacity = 1 - (frame_StartupLoad_fade/30);
+            }
 
             if (frame_StartupLoad_fade == 30)
-                {
-                    panel_Startup_Load.Visibility = Visibility.Collapsed;
-                }
+            {
+                panel_Startup_Load.Visibility = Visibility.Collapsed;
+            }
 
 
         }

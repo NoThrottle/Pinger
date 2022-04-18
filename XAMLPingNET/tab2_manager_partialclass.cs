@@ -265,7 +265,6 @@ namespace XAMLPingNET
 
                 active_iplist = game_ip;
                 active_ipaccuracy = game_ipaccuracy;
-                active_gamename = curr;
                 active_ipname = game_ipname;
 
                 UpdateGameUI(curr);
@@ -342,8 +341,6 @@ namespace XAMLPingNET
 
                 RowDefinition newrow2 = new RowDefinition();
                 newrow2.Name = "column2_" + gamename.CleanName() + ip.CleanName();
-
-                Debug.WriteLine(newrow2.Name);
                 newrow2.Height = new GridLength(28);
 
                 rows2.Add(newrow2);
@@ -428,7 +425,6 @@ namespace XAMLPingNET
         string[,] active_iplist = null;
         string[,] active_ipname = null;
         bool[,] active_ipaccuracy = null;
-        string active_gamename = null;
 
         private void UpdatePingRead_tick(object sender, EventArgs e)
         {
@@ -442,8 +438,6 @@ namespace XAMLPingNET
 
         private void UpdatePingRead(string[,] iplist, bool[,] ipaccuracy, List<Label> labellist, Grid[] gridlist)
         {
-
-            Debug.WriteLine("pinged");
             for(int i = 0; i < iplist.GetLength(0); i++)
             {
                 List<PingReply?> reply = new List<PingReply?>();
@@ -497,7 +491,6 @@ namespace XAMLPingNET
         }
 
         #endregion
-
     }
 
     class PacketLoss
