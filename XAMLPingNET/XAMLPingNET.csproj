@@ -7,7 +7,19 @@
     <UseWPF>true</UseWPF>
     <StartupObject></StartupObject>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <DebugType>none</DebugType>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <AssemblyName>XAMLPingNET</AssemblyName>
     <ApplicationIcon>normal_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Deterministic>False</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Deterministic>False</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
@@ -224,206 +236,606 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\close.png" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Light.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Medium.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Regular.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\OFL.txt" />
-    <Resource Include="Resources\NonUI\GameLogos\apexlegends_logo.png" />
-    <Resource Include="Resources\NonUI\GameLogos\valorant_logo.png" />
-    <Resource Include="Resources\NonUI\Logos\akamai-logo.png" />
-    <Resource Include="Resources\NonUI\Logos\aws-logo.png" />
-    <Resource Include="Resources\NonUI\Logos\cloudflare-logo.png" />
-    <Resource Include="Resources\NonUI\Logos\google-logo.png" />
-    <Resource Include="Resources\NonUI\Logos\router-wireless.png" />
-    <Resource Include="Resources\P.png" />
-    <Resource Include="Resources\Sequence\Loading\load000.png" />
-    <Resource Include="Resources\Sequence\Loading\load001.png" />
-    <Resource Include="Resources\Sequence\Loading\load002.png" />
-    <Resource Include="Resources\Sequence\Loading\load003.png" />
-    <Resource Include="Resources\Sequence\Loading\load004.png" />
-    <Resource Include="Resources\Sequence\Loading\load005.png" />
-    <Resource Include="Resources\Sequence\Loading\load006.png" />
-    <Resource Include="Resources\Sequence\Loading\load007.png" />
-    <Resource Include="Resources\Sequence\Loading\load008.png" />
-    <Resource Include="Resources\Sequence\Loading\load009.png" />
-    <Resource Include="Resources\Sequence\Loading\load010.png" />
-    <Resource Include="Resources\Sequence\Loading\load011.png" />
-    <Resource Include="Resources\Sequence\Loading\load012.png" />
-    <Resource Include="Resources\Sequence\Loading\load013.png" />
-    <Resource Include="Resources\Sequence\Loading\load014.png" />
-    <Resource Include="Resources\Sequence\Loading\load015.png" />
-    <Resource Include="Resources\Sequence\Loading\load016.png" />
-    <Resource Include="Resources\Sequence\Loading\load017.png" />
-    <Resource Include="Resources\Sequence\Loading\load018.png" />
-    <Resource Include="Resources\Sequence\Loading\load019.png" />
-    <Resource Include="Resources\Sequence\Loading\load020.png" />
-    <Resource Include="Resources\Sequence\Loading\load021.png" />
-    <Resource Include="Resources\Sequence\Loading\load022.png" />
-    <Resource Include="Resources\Sequence\Loading\load023.png" />
-    <Resource Include="Resources\Sequence\Loading\load024.png" />
-    <Resource Include="Resources\Sequence\Loading\load025.png" />
-    <Resource Include="Resources\Sequence\Loading\load026.png" />
-    <Resource Include="Resources\Sequence\Loading\load027.png" />
-    <Resource Include="Resources\Sequence\Loading\load028.png" />
-    <Resource Include="Resources\Sequence\Loading\load029.png" />
-    <Resource Include="Resources\Sequence\Loading\load030.png" />
-    <Resource Include="Resources\Sequence\Loading\load031.png" />
-    <Resource Include="Resources\Sequence\Loading\load032.png" />
-    <Resource Include="Resources\Sequence\Loading\load033.png" />
-    <Resource Include="Resources\Sequence\Loading\load034.png" />
-    <Resource Include="Resources\Sequence\Loading\load035.png" />
-    <Resource Include="Resources\Sequence\Loading\load036.png" />
-    <Resource Include="Resources\Sequence\Loading\load037.png" />
-    <Resource Include="Resources\Sequence\Loading\load038.png" />
-    <Resource Include="Resources\Sequence\Loading\load039.png" />
-    <Resource Include="Resources\Sequence\Loading\load040.png" />
-    <Resource Include="Resources\Sequence\Loading\load041.png" />
-    <Resource Include="Resources\Sequence\Loading\load042.png" />
-    <Resource Include="Resources\Sequence\Loading\load043.png" />
-    <Resource Include="Resources\Sequence\Loading\load044.png" />
-    <Resource Include="Resources\Sequence\Loading\load045.png" />
-    <Resource Include="Resources\Sequence\Loading\load046.png" />
-    <Resource Include="Resources\Sequence\Loading\load047.png" />
-    <Resource Include="Resources\Sequence\Loading\load048.png" />
-    <Resource Include="Resources\Sequence\Loading\load049.png" />
-    <Resource Include="Resources\Sequence\Loading\load050.png" />
-    <Resource Include="Resources\Sequence\Loading\load051.png" />
-    <Resource Include="Resources\Sequence\Loading\load052.png" />
-    <Resource Include="Resources\Sequence\Loading\load053.png" />
-    <Resource Include="Resources\Sequence\Loading\load054.png" />
-    <Resource Include="Resources\Sequence\Loading\load055.png" />
-    <Resource Include="Resources\Sequence\Loading\load056.png" />
-    <Resource Include="Resources\Sequence\Loading\load057.png" />
-    <Resource Include="Resources\Sequence\Loading\load058.png" />
-    <Resource Include="Resources\Sequence\Loading\load059.png" />
-    <Resource Include="Resources\Sequence\Loading\load060.png" />
-    <Resource Include="Resources\Sequence\Loading\load061.png" />
-    <Resource Include="Resources\Sequence\Loading\load062.png" />
-    <Resource Include="Resources\Sequence\Loading\load063.png" />
-    <Resource Include="Resources\Sequence\Loading\load064.png" />
-    <Resource Include="Resources\Sequence\Loading\load065.png" />
-    <Resource Include="Resources\Sequence\Loading\load066.png" />
-    <Resource Include="Resources\Sequence\Loading\load067.png" />
-    <Resource Include="Resources\Sequence\Loading\load068.png" />
-    <Resource Include="Resources\Sequence\Loading\load069.png" />
-    <Resource Include="Resources\Sequence\Loading\load070.png" />
-    <Resource Include="Resources\Sequence\Loading\load071.png" />
-    <Resource Include="Resources\Sequence\Loading\load072.png" />
-    <Resource Include="Resources\Sequence\Loading\load073.png" />
-    <Resource Include="Resources\Sequence\Loading\load074.png" />
-    <Resource Include="Resources\Sequence\Loading\load075.png" />
-    <Resource Include="Resources\Sequence\Loading\load076.png" />
-    <Resource Include="Resources\Sequence\Loading\load077.png" />
-    <Resource Include="Resources\Sequence\Loading\load078.png" />
-    <Resource Include="Resources\Sequence\Loading\load079.png" />
-    <Resource Include="Resources\Sequence\Loading\load080.png" />
-    <Resource Include="Resources\Sequence\Loading\load081.png" />
-    <Resource Include="Resources\Sequence\Loading\load082.png" />
-    <Resource Include="Resources\Sequence\Loading\load083.png" />
-    <Resource Include="Resources\Sequence\Loading\load084.png" />
-    <Resource Include="Resources\Sequence\Loading\load085.png" />
-    <Resource Include="Resources\Sequence\Loading\load086.png" />
-    <Resource Include="Resources\Sequence\Loading\load087.png" />
-    <Resource Include="Resources\Sequence\Loading\load088.png" />
-    <Resource Include="Resources\Sequence\Loading\load089.png" />
-    <Resource Include="Resources\Sequence\Loading\load090.png" />
-    <Resource Include="Resources\Sequence\Loading\load091.png" />
-    <Resource Include="Resources\Sequence\Loading\load092.png" />
-    <Resource Include="Resources\Sequence\Loading\load093.png" />
-    <Resource Include="Resources\Sequence\Loading\load094.png" />
-    <Resource Include="Resources\Sequence\Loading\load095.png" />
-    <Resource Include="Resources\Sequence\Loading\load096.png" />
-    <Resource Include="Resources\Sequence\Loading\load097.png" />
-    <Resource Include="Resources\Sequence\Loading\load098.png" />
-    <Resource Include="Resources\Sequence\Loading\load099.png" />
-    <Resource Include="Resources\Sequence\Loading\load100.png" />
-    <Resource Include="Resources\Sequence\Loading\load101.png" />
-    <Resource Include="Resources\Sequence\Loading\load102.png" />
-    <Resource Include="Resources\Sequence\Loading\load103.png" />
-    <Resource Include="Resources\Sequence\Loading\load104.png" />
-    <Resource Include="Resources\Sequence\Loading\load105.png" />
-    <Resource Include="Resources\Sequence\Loading\load106.png" />
-    <Resource Include="Resources\Sequence\Loading\load107.png" />
-    <Resource Include="Resources\Sequence\Loading\load108.png" />
-    <Resource Include="Resources\Sequence\Loading\load109.png" />
-    <Resource Include="Resources\Sequence\Loading\load110.png" />
-    <Resource Include="Resources\Sequence\Loading\load111.png" />
-    <Resource Include="Resources\Sequence\Loading\load112.png" />
-    <Resource Include="Resources\Sequence\Loading\load113.png" />
-    <Resource Include="Resources\Sequence\Loading\load114.png" />
-    <Resource Include="Resources\Sequence\Loading\load115.png" />
-    <Resource Include="Resources\Sequence\Loading\load116.png" />
-    <Resource Include="Resources\Sequence\Loading\load117.png" />
-    <Resource Include="Resources\Sequence\Loading\load118.png" />
-    <Resource Include="Resources\Sequence\Loading\load119.png" />
-    <Resource Include="Resources\Sequence\Loading\load120.png" />
-    <Resource Include="Resources\Sequence\Loading\load121.png" />
-    <Resource Include="Resources\Sequence\Loading\load122.png" />
-    <Resource Include="Resources\Sequence\Loading\load123.png" />
-    <Resource Include="Resources\Sequence\Loading\load124.png" />
-    <Resource Include="Resources\Sequence\Loading\load125.png" />
-    <Resource Include="Resources\Sequence\Loading\load126.png" />
-    <Resource Include="Resources\Sequence\Loading\load127.png" />
-    <Resource Include="Resources\Sequence\Loading\load128.png" />
-    <Resource Include="Resources\Sequence\Loading\load129.png" />
-    <Resource Include="Resources\Sequence\Loading\load130.png" />
-    <Resource Include="Resources\Sequence\Loading\load131.png" />
-    <Resource Include="Resources\Sequence\Loading\load132.png" />
-    <Resource Include="Resources\Sequence\Loading\load133.png" />
-    <Resource Include="Resources\Sequence\Loading\load134.png" />
-    <Resource Include="Resources\Sequence\Loading\load135.png" />
-    <Resource Include="Resources\Sequence\Loading\load136.png" />
-    <Resource Include="Resources\Sequence\Loading\load137.png" />
-    <Resource Include="Resources\Sequence\Loading\load138.png" />
-    <Resource Include="Resources\Sequence\Loading\load139.png" />
-    <Resource Include="Resources\Sequence\Loading\load140.png" />
-    <Resource Include="Resources\Sequence\Loading\load141.png" />
-    <Resource Include="Resources\Sequence\Loading\load142.png" />
-    <Resource Include="Resources\Sequence\Loading\load143.png" />
-    <Resource Include="Resources\Sequence\Loading\load144.png" />
-    <Resource Include="Resources\Sequence\Loading\load145.png" />
-    <Resource Include="Resources\Sequence\Loading\load146.png" />
-    <Resource Include="Resources\Sequence\Loading\load147.png" />
-    <Resource Include="Resources\Sequence\Loading\load148.png" />
-    <Resource Include="Resources\Sequence\Loading\load149.png" />
-    <Resource Include="Resources\Sequence\Loading\load150.png" />
-    <Resource Include="Resources\Sequence\Loading\load151.png" />
-    <Resource Include="Resources\Sequence\Loading\load152.png" />
-    <Resource Include="Resources\Sequence\Loading\load153.png" />
-    <Resource Include="Resources\Sequence\Loading\load154.png" />
-    <Resource Include="Resources\Sequence\Loading\load155.png" />
-    <Resource Include="Resources\Sequence\Loading\load156.png" />
-    <Resource Include="Resources\Sequence\Loading\load157.png" />
-    <Resource Include="Resources\Sequence\Loading\load158.png" />
-    <Resource Include="Resources\Sequence\Loading\load159.png" />
-    <Resource Include="Resources\Sequence\Loading\load160.png" />
-    <Resource Include="Resources\Sequence\Loading\load161.png" />
-    <Resource Include="Resources\Sequence\Loading\load162.png" />
-    <Resource Include="Resources\Sequence\Loading\load163.png" />
-    <Resource Include="Resources\Sequence\Loading\load164.png" />
-    <Resource Include="Resources\Sequence\Loading\load165.png" />
-    <Resource Include="Resources\Sequence\Loading\load166.png" />
-    <Resource Include="Resources\Sequence\Loading\load167.png" />
-    <Resource Include="Resources\Sequence\Loading\load168.png" />
-    <Resource Include="Resources\Sequence\Loading\load169.png" />
-    <Resource Include="Resources\Sequence\Loading\load170.png" />
-    <Resource Include="Resources\Sequence\Loading\load171.png" />
-    <Resource Include="Resources\Sequence\Loading\load172.png" />
-    <Resource Include="Resources\Sequence\Loading\load173.png" />
-    <Resource Include="Resources\Sequence\Loading\load174.png" />
-    <Resource Include="Resources\Sequence\Loading\load175.png" />
-    <Resource Include="Resources\Sequence\Loading\load176.png" />
-    <Resource Include="Resources\Sequence\Loading\load177.png" />
-    <Resource Include="Resources\Sequence\Loading\load178.png" />
-    <Resource Include="Resources\Sequence\Loading\load179.png" />
-    <Resource Include="Resources\Tabs\chart-box-outline.png" />
-    <Resource Include="Resources\Tabs\chart-box.png" />
-    <Resource Include="Resources\Tabs\controller-classic-outline.png" />
-    <Resource Include="Resources\Tabs\controller-classic.png" />
-    <Resource Include="Resources\Tabs\web-filled.png" />
-    <Resource Include="Resources\Tabs\web.png" />
+    <Resource Include="Resources\close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Light.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Montserrat\OFL.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\GameLogos\apexlegends_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\GameLogos\valorant_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\Logos\akamai-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\Logos\aws-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\Logos\cloudflare-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\Logos\google-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\NonUI\Logos\router-wireless.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\P.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load000.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load001.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load002.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load003.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load004.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load005.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load006.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load007.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load008.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load009.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load010.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load011.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load012.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load013.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load014.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load015.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load016.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load017.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load018.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load019.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load020.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load021.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load022.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load023.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load024.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load025.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load026.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load027.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load028.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load029.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load030.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load031.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load032.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load033.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load034.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load035.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load036.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load037.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load038.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load039.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load040.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load041.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load042.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load043.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load044.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load045.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load046.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load047.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load048.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load049.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load050.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load051.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load052.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load053.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load054.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load055.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load056.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load057.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load058.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load059.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load060.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load061.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load062.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load063.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load064.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load065.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load066.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load067.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load068.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load069.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load070.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load071.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load072.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load073.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load074.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load075.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load076.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load077.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load078.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load079.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load080.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load081.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load082.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load083.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load084.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load085.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load086.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load087.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load088.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load089.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load090.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load091.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load092.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load093.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load094.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load095.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load096.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load097.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load098.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load099.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load101.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load102.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load103.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load104.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load105.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load106.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load107.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load108.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load109.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load110.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load111.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load112.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load113.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load114.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load115.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load116.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load117.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load118.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load119.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load120.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load121.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load122.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load123.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load124.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load125.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load126.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load127.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load128.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load129.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load130.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load131.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load132.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load133.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load134.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load135.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load136.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load137.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load138.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load139.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load140.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load141.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load142.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load143.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load144.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load145.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load146.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load147.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load148.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load149.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load151.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load152.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load153.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load154.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load155.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load156.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load157.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load158.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load159.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load160.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load161.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load162.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load163.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load164.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load165.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load166.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load167.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load168.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load169.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load170.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load171.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load172.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load173.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load174.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load175.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load176.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load177.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load178.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sequence\Loading\load179.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\chart-box-outline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\chart-box.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\controller-classic-outline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\controller-classic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\web-filled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Tabs\web.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
