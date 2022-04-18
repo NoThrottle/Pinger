@@ -32,6 +32,54 @@ namespace XAMLPingNET
 
         }
 
+        private void Tabs(int tab)
+        {
+            switch (tab)
+            {
+                case 1:
+                    InitializeTab1();
+                    UninitializeTab2();
+
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+
+                    tab1_panel.Visibility = Visibility.Visible;
+                    tab2_panel.Visibility = Visibility.Collapsed;
+                    //tab3_panel.Visibility = Visibility.Collapsed;
+
+
+                    break;
+
+                case 2:
+                    InitializeTab2();
+                    UninitializeTab1();
+
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+
+                    tab2_panel.Visibility = Visibility.Visible;
+                    tab1_panel.Visibility = Visibility.Collapsed;
+                    //tab3_panel.Visibility = Visibility.Collapsed;
+                    break;
+
+                case 3:
+                    UninitializeTab1();
+                    UninitializeTab2();
+
+                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
+                    tab3.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
+
+                    //tab3_panel.Visibility = Visibility.Visible;
+                    tab1_panel.Visibility = Visibility.Collapsed;
+                    tab2_panel.Visibility = Visibility.Collapsed;
+
+                    break;
+            }
+        }
+
         #region ActiveButton
 
         bool activebutton_active = false;

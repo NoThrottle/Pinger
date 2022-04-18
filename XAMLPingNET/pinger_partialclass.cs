@@ -50,6 +50,7 @@ namespace XAMLPingNET
 
         //---------------//
 
+        #region PingReply Sets
         //Google Information
         PingReply google_cloud_result = null;
         PingReply google_youtubesite_result = null;
@@ -82,6 +83,7 @@ namespace XAMLPingNET
         PingReply isp_skyfiber_result = null;
         PingReply isp_converge_result = null;
         PingReply isp_dito_result = null;
+        #endregion
 
         //---------------//
 
@@ -190,6 +192,55 @@ namespace XAMLPingNET
 
         }
 
+        private string Summary(PingReply[] pings)
+        {
+
+            int active = 0;
+            int total = 0;
+            int todivide = 0;
+
+            foreach (PingReply ping in pings)
+            {
+                total++;
+
+                if ((ping != null) && (ping.Status == IPStatus.Success))
+                {
+                    active++;
+                    todivide += (int)Math.Round((double)ping.RoundtripTime);
+
+                }
+
+            }
+
+            if (active > 0)
+            {
+                return (todivide / active).ToString() + "ms - " + active + "/" + total + "";
+            }
+            else
+            {
+                return "Unavailable - 0/" + total + "";
+            }
+        }
+
+        private string SolveAddress(PingReply reply)
+        {
+            if (reply != null)
+            {
+                try
+                {
+                    return reply.Address.ToString();
+                }
+                catch
+                {
+                    return "Unavailable";
+                }
+            }
+            else
+            {
+                return "Error";
+            }
+        }
+
         private static async Task<PingReply?> PingHost(string address)
         {
             CancellationTokenSource s_cts = new CancellationTokenSource();
@@ -230,25 +281,6 @@ namespace XAMLPingNET
             Debug.WriteLine("Timed out");
             return null;
 
-        }
-
-        private string SolveAddress(PingReply reply)
-        {
-            if (reply != null)
-            {
-                try
-                {
-                    return reply.Address.ToString();
-                }
-                catch
-                {
-                    return "Unavailable";
-                }
-            }
-            else
-            {
-                return "Error";
-            }
         }
 
         private void PingEachOne()
@@ -334,36 +366,6 @@ namespace XAMLPingNET
             });
 
             #endregion
-        }
-
-        private string Summary(PingReply[] pings)
-        {
-
-            int active = 0;
-            int total = 0;
-            int todivide = 0;
-
-            foreach (PingReply ping in pings) 
-            {
-                total++;
-
-                if ((ping != null) && (ping.Status == IPStatus.Success))
-                {
-                    active++;
-                    todivide += (int)Math.Round((double)ping.RoundtripTime);
-
-                }
-           
-            }
-
-            if (active > 0)
-            {
-                return (todivide / active).ToString() + "ms - " + active + "/" + total + "";
-            }
-            else
-            {
-                return "Unavailable - 0/" + total + "";
-            }
         }
 
         private void UpdateEachOne()
@@ -511,55 +513,7 @@ namespace XAMLPingNET
             Tabs(3);
         }
         #endregion  
-
-        private void Tabs(int tab)
-        {
-            switch (tab)
-            {
-                case 1:
-                    InitializeTab1();
-                    UninitializeTab2();
-
-                    tab1.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
-                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-
-                    tab1_panel.Visibility = Visibility.Visible;
-                    tab2_panel.Visibility = Visibility.Collapsed;
-                    //tab3_panel.Visibility = Visibility.Collapsed;
-
-
-                    break;
-
-                case 2:
-                    InitializeTab2();
-                    UninitializeTab1();
-
-                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-                    tab2.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
-                    tab3.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-
-                    tab2_panel.Visibility = Visibility.Visible;
-                    tab1_panel.Visibility = Visibility.Collapsed;
-                    //tab3_panel.Visibility = Visibility.Collapsed;
-                    break;
-
-                case 3:
-                    UninitializeTab1();
-                    UninitializeTab2();
-
-                    tab1.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-                    tab2.Background = new SolidColorBrush(Color.FromArgb(0, 70, 70, 70));
-                    tab3.Background = new SolidColorBrush(Color.FromArgb(255, 70, 70, 70));
-
-                    //tab3_panel.Visibility = Visibility.Visible;
-                    tab1_panel.Visibility = Visibility.Collapsed;
-                    tab2_panel.Visibility = Visibility.Collapsed;
-
-                    break;
-            }
-        }
-        
+       
     }
    
 }
