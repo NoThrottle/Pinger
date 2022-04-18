@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,19 +36,30 @@ namespace XAMLPingNET
             return text.Replace(".", "").Replace(" ", "").Replace("-", "_");
         }
 
-        public static IPAddress GetDefaultGateway()
+        public static IEnumerable<IPAddress> GetGateway()
         {
-            return NetworkInterface
-                .GetAllNetworkInterfaces()
-                .Where(n => n.OperationalStatus == OperationalStatus.Up)
-                .Where(n => n.NetworkInterfaceType != NetworkInterfaceType.Loopback)
-                .SelectMany(n => n.GetIPProperties()?.GatewayAddresses)
-                .Select(g => g?.Address)
-                .Where(a => a != null)
-                // .Where(a => a.AddressFamily == AddressFamily.InterNetwork)
-                .Where(a => Array.FindIndex(a.GetAddressBytes(), b => b != 0) >= 0)
-                .FirstOrDefault();
-        }
+            // following are similar to the defaults in the "traceroute" unix command.
+            const int timeout = 10000;
+            const int maxTTL = 2;
+            const int bufferSize = 32;
 
+            byte[] buffer = new byte[bufferSize];
+            new Random().NextBytes(buffer);
+
+            using (var pinger = new Ping())
+            {
+                for (int ttl = 1; ttl <= maxTTL; ttl++)
+                {
+                    PingOptions options = new PingOptions(ttl, true);
+                    PingReply reply = pinger.Send("1.1.1.1", timeout, buffer, options);
+
+                    if (reply.Status == IPStatus.Success || reply.Status == IPStatus.TtlExpired)
+                        yield return reply.Address;
+
+                    if (reply.Status != IPStatus.TtlExpired && reply.Status != IPStatus.TimedOut)
+                        break;
+                }
+            }
+        }
     }
 }

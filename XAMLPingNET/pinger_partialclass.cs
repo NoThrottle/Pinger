@@ -108,11 +108,11 @@ namespace XAMLPingNET
                 ui_timer = null;
             }
 
-            if (pinger_timer != null)
-            {
-                pinger_timer.Stop();
-                pinger_timer = null;
-            }
+            //if (pinger_timer != null)
+            //{
+            //    pinger_timer.Stop();
+            //    pinger_timer = null;
+            //}
         }
 
         #region Timers
@@ -148,6 +148,7 @@ namespace XAMLPingNET
 
         private void PingerTimer_Tick(object sender, EventArgs e)
         {
+            Task.Run(() => { tab2_panel_connection_update(); });
             PingEachOne();
         }
 
