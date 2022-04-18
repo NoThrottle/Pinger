@@ -24,8 +24,6 @@ namespace XAMLPingNET
     {
         public MainWindow()
         {
-            Debug.WriteLine("istart");
-
             InitializeComponent();
             Startup_Load_Loop_Timer("start");
             UpdateAcrylic();

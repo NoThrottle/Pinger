@@ -18,14 +18,6 @@ namespace XAMLPingNET
 {
     public partial class MainWindow
     {
-
-        string[] game_list = new string[]
-        {
-            "Valorant",
-            "Apex Legends",
-            "League of Legends"
-        };
-
         private void InitializeTab2()
         {
 
@@ -49,6 +41,8 @@ namespace XAMLPingNET
         {
             Game_Pinger_Timer_func("stop");
         }
+
+        //--------------//
 
         private void Tab2_ResetToDefault()
         {
@@ -78,6 +72,67 @@ namespace XAMLPingNET
             active_gridlist.Clear();
 
         }
+
+        private void tabs2_game_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            game_combobox_default.Visibility = Visibility.Collapsed;
+            Game_Pinger_Timer_func("stop");
+
+            try
+            {
+                Tab2_ResetToDefault();
+                string curr = this.game_combobox.SelectedItem.ToString();
+
+                Type thisType = this.GetType();
+                MethodInfo theMethod = thisType.GetMethod("Game_" + (curr.Replace(" ", "")));
+
+                Debug.WriteLine("Game_" + (curr.Replace(" ", "")));
+
+                string[,] game_ip = theMethod.Invoke(this, new object[] { "ip" }) as string[,];
+                string[,] game_ipname = theMethod.Invoke(this, new object[] { "ipname" }) as string[,];
+                bool[,] game_ipaccuracy = theMethod.Invoke(this, new object[] { "ipaccuracy" }) as bool[,];
+
+                active_iplist = game_ip;
+                active_ipaccuracy = game_ipaccuracy;
+                active_ipname = game_ipname;
+
+                UpdateGameUI(curr);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine("tabs2_game_combobox_selectionchanged error was suppressed. If everything is working fine, ignore this");
+
+            }
+
+        }
+
+        private void tab2_panel_connection_update()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                tab2_panel_connection_gatewayresult.Content = (NetworkInterface.GetIsNetworkAvailable()) ? "Connected" : "Disconnected";
+
+                try
+                {
+                    tab2_panel_connection_routerping.Content = (extention.GetGateway() != null) ? PingHost(extention.GetGateway().First(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString()).Result.RoundtripTime + "ms" : "-";
+                }
+                catch
+                {
+                    tab2_panel_connection_routerping.Content = "-";
+                }
+            });
+
+        }
+
+        //--------------//
+
+        string[] game_list = new string[]
+{
+            "Valorant",
+            "Apex Legends",
+            "League of Legends"
+};
 
         public dynamic Game_Valorant(string obtain)
         {
@@ -242,58 +297,6 @@ namespace XAMLPingNET
                 default:
                     throw new Exception("Incorrect string of obtaining values from game");
             }
-        }
-
-        private void tabs2_game_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            game_combobox_default.Visibility = Visibility.Collapsed;
-            Game_Pinger_Timer_func("stop");
-
-            try
-            {
-                Tab2_ResetToDefault();
-                string curr = this.game_combobox.SelectedItem.ToString();
-
-                Type thisType = this.GetType();
-                MethodInfo theMethod = thisType.GetMethod("Game_" + (curr.Replace(" ", "")));
-
-                Debug.WriteLine("Game_" + (curr.Replace(" ", "")));
-
-                string[,] game_ip = theMethod.Invoke(this, new object[] { "ip" }) as string[,];
-                string[,] game_ipname = theMethod.Invoke(this, new object[] { "ipname" }) as string[,];
-                bool[,] game_ipaccuracy = theMethod.Invoke(this, new object[] { "ipaccuracy" }) as bool[,];
-
-                active_iplist = game_ip;
-                active_ipaccuracy = game_ipaccuracy;
-                active_ipname = game_ipname;
-
-                UpdateGameUI(curr);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                Debug.WriteLine("tabs2_game_combobox_selectionchanged error was suppressed. If everything is working fine, ignore this");
-
-            }
-
-        }
-
-        private void tab2_panel_connection_update()
-        {
-            Dispatcher.Invoke(() => 
-            {
-                tab2_panel_connection_gatewayresult.Content = (NetworkInterface.GetIsNetworkAvailable()) ? "Connected" : "Disconnected";
-
-                try
-                {
-                    tab2_panel_connection_routerping.Content = (extention.GetGateway() != null) ? PingHost(extention.GetGateway().First(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString()).Result.RoundtripTime + "ms" : "-";
-                }
-                catch
-                {
-                    tab2_panel_connection_routerping.Content = "-";
-                }
-            });
-
         }
 
         //---------------//

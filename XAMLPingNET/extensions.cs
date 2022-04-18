@@ -38,9 +38,9 @@ namespace XAMLPingNET
 
         public static IEnumerable<IPAddress> GetGateway()
         {
-            // following are similar to the defaults in the "traceroute" unix command.
-            const int timeout = 10000;
-            const int maxTTL = 2;
+            // stolen from stackoverflow :>
+            const int timeout = 5000;
+            const int maxTTL = 1;
             const int bufferSize = 32;
 
             byte[] buffer = new byte[bufferSize];
