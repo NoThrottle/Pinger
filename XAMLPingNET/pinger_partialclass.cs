@@ -1,34 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Media;
-
-using SourceChord.FluentWPF;
 using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Controls.Ribbon;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Media.TextFormatting;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Shell;
-using XAMLPingNET;
 
 namespace XAMLPingNET
 {
@@ -581,33 +560,5 @@ namespace XAMLPingNET
         }
         
     }
-
-    public static class extention
-    {
-        public static async Task TimeoutAfter(this Task task, int millisecondsTimeout)
-        {
-            if (task == await Task.WhenAny(task, Task.Delay(millisecondsTimeout)))
-                await task;
-            else
-                throw new TimeoutException();
-        }
-
-        public static string Pluralizer(this string word, double amount)
-        {
-            if (amount != 1)
-            {
-                return word + "s";
-            }
-            else
-            {
-                return word;
-            }
-        }
-
-        public static string CleanName(this string text)
-        {
-            return text.Replace(".", "").Replace(" ", "").Replace("-","_");
-        }
-
-    }
+   
 }

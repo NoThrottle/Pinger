@@ -455,9 +455,9 @@ namespace XAMLPingNET
                         label.Content = (ipaccuracy[i, 0] == true ? @"ⓘ " : "") + toreturn;
                         label.ToolTip = string.Join(Environment.NewLine, tooltip);
                     }
-                    catch (Exception ex)
+                    catch (NullReferenceException e)
                     {
-                        Debug.WriteLine(ex);
+                        Debug.WriteLine("Null on Ping");
                     }
 
                 }));
