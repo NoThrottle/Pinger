@@ -12,10 +12,12 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <AssemblyName>XAMLPingNET</AssemblyName>
     <ApplicationIcon>normal_icon.ico</ApplicationIcon>
+	<DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Deterministic>False</Deterministic>
+    <Deterministic>True</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -230,12 +232,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlurryControls" Version="1.0.24" />
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="FluentWPF" Version="0.10.2" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
   </ItemGroup>
 

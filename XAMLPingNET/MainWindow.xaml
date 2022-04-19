@@ -12,6 +12,7 @@
         MouseDown="Window_MouseDown"
         BorderBrush="#FF121212"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         fw:AcrylicWindow.Enabled="True">
 
 
@@ -965,7 +966,7 @@
 
         </Grid>
 
-        <Grid Name="tab2_panel" Grid.Row="1" Visibility="Visible">
+        <Grid Name="tab2_panel" Grid.Row="1" Visibility="Collapsed">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -1116,6 +1117,17 @@
 
         </Grid>
 
+        <Grid Name="tab3_panel" Grid.Row="1" Visibility="Hidden">
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" Zoom="X" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Ping" LabelFormatter="{Binding YFormatter}" ></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Hours" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Grid>
+
         <Grid Grid.Row="4" Background="#9F0C0C0C">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -1141,7 +1153,7 @@
         <!--TabBar-->
 
         <!--Dont Forget to re show this-->
-        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Visible" Opacity="1" Background="#FF121212">
+        <Grid Name="panel_Startup_Load" Grid.Row="1" Grid.RowSpan="4" Visibility="Collapsed" Opacity="1" Background="#FF121212">
             <Image x:Name="Startup_Load" Height="96" Width="96" Stretch="Fill" Source="/Resources/Sequence/Loading/load000.png" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 

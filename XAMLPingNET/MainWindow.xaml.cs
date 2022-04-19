@@ -25,6 +25,9 @@ namespace XAMLPingNET
         public MainWindow()
         {
             InitializeComponent();
+
+            PointShapeLineExample();
+
             Startup_Load_Loop_Timer("start");
             UpdateAcrylic();
             Tabs(1);
