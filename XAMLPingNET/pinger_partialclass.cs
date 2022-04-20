@@ -88,7 +88,7 @@ namespace XAMLPingNET
         //---------------//
 
         double intervaltimer = 5; //seconds
-        double uitimer = 1/4; //15fps
+        double uitimer = 5; //15fps
         int setactive = 0; //0 is none
 
         //---------------//
@@ -110,11 +110,6 @@ namespace XAMLPingNET
                 ui_timer = null;
             }
 
-            //if (pinger_timer != null)
-            //{
-            //    pinger_timer.Stop();
-            //    pinger_timer = null;
-            //}
         }
 
         #region Timers
@@ -152,6 +147,7 @@ namespace XAMLPingNET
         {
             Task.Run(() => { tab2_panel_connection_update(); });
             PingEachOne();
+
         }
 
         private void UITimer_Tick(object sender, EventArgs e)
@@ -366,6 +362,40 @@ namespace XAMLPingNET
             #endregion
         }
 
+        private void UpdateUI(int d)
+        {
+
+            switch (d)
+            {
+                case 0:
+                    info_logo.Visibility = Visibility.Hidden;
+                    break;
+                case 1:
+                    info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/google-logo.png", UriKind.Relative));
+                    info_brand.Text = "Google Cloud Platform";
+                    break;
+                case 2:
+                    info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/aws-logo.png", UriKind.Relative));
+                    info_brand.Text = "Amazon Web Services";
+                    break;
+                case 3:
+                    info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/cloudflare-logo.png", UriKind.Relative));
+                    info_brand.Text = "Cloudflare";
+                    break;
+                case 4:
+                    info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/akamai-logo.png", UriKind.Relative));
+                    info_brand.Text = "Akamai Technologies";
+                    break;
+                case 5:
+                    info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/router-wireless.png", UriKind.Relative));
+                    info_brand.Text = "Local Networks";
+                    break;
+            }
+            info_logo.Visibility = Visibility.Visible;
+            info_panel.Visibility = Visibility.Visible;
+
+        }
+
         private void UpdateEachOne()
         {
             try
@@ -378,13 +408,7 @@ namespace XAMLPingNET
 
                 switch (setactive)
                 {
-                    case 0:
-                        info_logo.Visibility = Visibility.Hidden;
-                        break;
-
                     case 1:
-                        info_logo.Source = new BitmapImage (new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/google-logo.png", UriKind.Relative));
-                        info_brand.Text = "Google Cloud Platform"; 
                         //left column
                         info_item1_text.Content = SolveAddress(google_cloud_result);
                         info_item2_text.Content = SolveAddress(google_youtubesite_result);
@@ -397,12 +421,9 @@ namespace XAMLPingNET
                         info_item3ms_text.Content = SolvePing(google_site_result);
                         info_item4ms_text.Content = SolvePing(google_dns1_result);
                         info_item5ms_text.Content = SolvePing(google_dns2_result);
-                        info_logo.Visibility = Visibility.Visible;
                         break;
 
                     case 2:
-                        info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/aws-logo.png", UriKind.Relative));
-                        info_brand.Text = "Amazon Web Services";
                         //left column
                         info_item1_text.Content = SolveAddress(amazon_cloudfront_result);
                         info_item2_text.Content = SolveAddress(amazon_awssite_result);
@@ -415,12 +436,9 @@ namespace XAMLPingNET
                         info_item3ms_text.Content = SolvePing(amazon_aws_ap_se_result);
                         info_item4ms_text.Content = SolvePing(amazon_aws_ap_ne_result);
                         info_item5ms_text.Content = SolvePing(amazon_aws_ap_e_result);
-                        info_logo.Visibility = Visibility.Visible;
                         break;
 
                     case 3:
-                        info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/cloudflare-logo.png", UriKind.Relative));
-                        info_brand.Text = "Cloudflare";
                         //left column
                         info_item1_text.Content = SolveAddress(cloudflare_site_result);
                         info_item2_text.Content = SolveAddress(cloudflare_dns1_result);
@@ -433,12 +451,9 @@ namespace XAMLPingNET
                         info_item3ms_text.Content = SolvePing(cloudflare_dns2_result);
                         info_item4ms_text.Content = SolvePing(cloudflare_ip1_result);
                         info_item5ms_text.Content = SolvePing(cloudflare_ip2_result);
-                        info_logo.Visibility = Visibility.Visible;
                         break;
 
                     case 4:
-                        info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/akamai-logo.png", UriKind.Relative));
-                        info_brand.Text = "Akamai Technologies";
                         //left column
                         info_item1_text.Content = SolveAddress(akamai_site_result);
                         info_item2_text.Content = SolveAddress(akamai_ip1_result);
@@ -451,12 +466,9 @@ namespace XAMLPingNET
                         info_item3ms_text.Content = SolvePing(akamai_dns_result);
                         info_item4ms_text.Content = "";
                         info_item5ms_text.Content = "";
-                        info_logo.Visibility = Visibility.Visible;
                         break;
 
                     case 5:
-                        info_logo.Source = new BitmapImage(new Uri("/XAMLPingNET;component/Resources/NonUI/Logos/router-wireless.png", UriKind.Relative));
-                        info_brand.Text = "Local Networks";
                         //left column
                         info_item1_text.Content = SolveAddress(isp_globe_result);
                         info_item2_text.Content = SolveAddress(isp_pldt_result);
@@ -469,12 +481,9 @@ namespace XAMLPingNET
                         info_item3ms_text.Content = SolvePing(isp_skyfiber_result);
                         info_item4ms_text.Content = SolvePing(isp_converge_result);
                         info_item5ms_text.Content = SolvePing(isp_dito_result);
-                        info_logo.Visibility = Visibility.Visible;
                         break;
 
                 }
-
-
             }
             catch (Exception ex)
             {

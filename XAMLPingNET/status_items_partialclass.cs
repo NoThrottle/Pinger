@@ -17,10 +17,6 @@ namespace XAMLPingNET
 {
     public partial class MainWindow
     {
-        private void RevealInfo()
-        {
-            info_panel.Visibility = Visibility.Visible;
-        }
 
         #region HoverHandlers
 
@@ -44,8 +40,7 @@ namespace XAMLPingNET
         
         private void status_item1_mousedown(object sender, MouseButtonEventArgs e)
         {
-            RevealInfo();
-            setactive = 1;
+            UpdateUI(1);
         }
 
         //
@@ -70,9 +65,7 @@ namespace XAMLPingNET
 
         private void status_item2_mousedown(object sender, MouseButtonEventArgs e)
         {
-            RevealInfo();
-            setactive = 2;
-
+            UpdateUI(2);
         }
 
         //
@@ -97,8 +90,7 @@ namespace XAMLPingNET
 
         private void status_item3_mousedown(object sender, MouseButtonEventArgs e)
         {
-            RevealInfo();
-            setactive = 3;
+            UpdateUI(3);
         }
 
         //
@@ -123,8 +115,7 @@ namespace XAMLPingNET
 
         private void status_item4_mousedown(object sender, MouseButtonEventArgs e)
         {
-            RevealInfo();
-            setactive = 4;
+            UpdateUI(4);
         }
 
         //
@@ -149,8 +140,7 @@ namespace XAMLPingNET
 
         private void status_item5_mousedown(object sender, MouseButtonEventArgs e)
         {
-            RevealInfo();
-            setactive = 5;
+            UpdateUI(5);
         }
 
         #endregion
