@@ -141,7 +141,7 @@ namespace XAMLPingNET
             //Test Server IP Addresses
             string[,] game_ip = new string[,]
             {
-            {"103.247.139.18",""},//Asia-Pacific
+            {"103.247.139.18","36.255.57.42"},//Asia-Pacific
             {"27.111.229.182",""},
             {"210.176.150.254",""},
             {"195.66.226.186",""},
